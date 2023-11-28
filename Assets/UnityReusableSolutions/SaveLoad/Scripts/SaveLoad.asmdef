@@ -1,7 +1,9 @@
 {
     "name": "SaveLoad",
     "rootNamespace": "Devolvist.UnityReusableSolutions.SaveLoad",
-    "references": [],
+    "references": [
+        "GUID:7426b460172621947ab06231e7d84ec8"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
