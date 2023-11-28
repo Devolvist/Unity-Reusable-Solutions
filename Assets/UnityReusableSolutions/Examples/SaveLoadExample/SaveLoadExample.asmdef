@@ -1,0 +1,17 @@
+{
+    "name": "SaveLoadExample",
+    "rootNamespace": "Devolvist.UnityReusableSolutions.SaveLoadExample",
+    "references": [
+        "GUID:2d3fbd8cfea448845adfd6fe3405408a",
+        "GUID:7426b460172621947ab06231e7d84ec8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

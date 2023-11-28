@@ -10,6 +10,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
     public class SaveLoadService : MonoSingleton<SaveLoadService>
     {
         [SerializeField] private LocalSaveLoadConfig _localSaveLoadConfig;
+
         private LocalDataReadWrite _localReadWriteData;
 
         private static List<ISavable> _registeredSavableObjects;
@@ -48,6 +49,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
             return _localReadWriteData.DeleteData(id);
         }
 
+        #region Operations_with_registered_clients
         /// <summary>
         /// Регистрация сохраняемого объекта для автоматического вызова методов его интерфейса.
         /// Повторная регистрация не засчитывается.
@@ -89,6 +91,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
                 savable.Save();
             }
         }
+        #endregion
 
         // Есть подозрение что в сборке данные портятся при сохранении при выходе.
         //private void OnApplicationQuit()
