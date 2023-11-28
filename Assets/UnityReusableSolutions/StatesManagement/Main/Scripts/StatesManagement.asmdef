@@ -1,0 +1,14 @@
+{
+    "name": "StatesManagement",
+    "rootNamespace": "Devolvist.UnityReusableSolutions.StatesManagement",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
