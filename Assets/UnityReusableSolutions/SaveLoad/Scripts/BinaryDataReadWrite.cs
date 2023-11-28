@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Devolvist.UnityReusableSolutions.SaveLoad
 {
-    public class BinaryDataReadWrite : DeviceReadWriteData
+    public class BinaryDataReadWrite : LocalDataReadWrite
     {
         private BinaryFormatter _formatter;
 
         public BinaryDataReadWrite(string dataFolderName) : base(dataFolderName)
         {
-            fileExtension = ".save";
+            FileExtension = ".save";
             _formatter = new BinaryFormatter();
         }
 

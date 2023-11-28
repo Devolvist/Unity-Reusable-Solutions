@@ -4,33 +4,33 @@ using UnityEngine;
 namespace Devolvist.UnityReusableSolutions.SaveLoad
 {
     /// <summary>
-    /// Чтение-запись данных, хранимых на устройстве пользователя.
+    /// Чтение-запись данных на устройстве пользователя.
     /// </summary>
-    public abstract class DeviceReadWriteData : ReadWriteData
+    public abstract class LocalDataReadWrite : ReadWriteData
     {
-        public DeviceReadWriteData(string dataFolderName)
+        public LocalDataReadWrite(string dataFolderName)
         {
-            dataFolderDirectoryPath = $"{Application.persistentDataPath}/{dataFolderName}";
+            DataFolderDirectoryPath = $"{Application.persistentDataPath}/{dataFolderName}";
 
-            if (!Directory.Exists(dataFolderDirectoryPath))
-                Directory.CreateDirectory(dataFolderDirectoryPath);
+            if (!Directory.Exists(DataFolderDirectoryPath))
+                Directory.CreateDirectory(DataFolderDirectoryPath);
         }
 
-        protected string fileExtension;
+        protected string FileExtension;
 
         /// <summary>
         /// Путь к папке c файлами данных.
         /// </summary>
-        protected readonly string dataFolderDirectoryPath;
+        protected readonly string DataFolderDirectoryPath;
 
         public override bool HasWrittenData()
         {
             // Проверить наличие папки с записанными данными.
-            if (!Directory.Exists(dataFolderDirectoryPath))
+            if (!Directory.Exists(DataFolderDirectoryPath))
                 return false;
 
             // Проверить наличие файлов в папке.
-            if (Directory.GetFiles(dataFolderDirectoryPath).Length == 0)
+            if (Directory.GetFiles(DataFolderDirectoryPath).Length == 0)
                 return false;
             else
                 return true;
@@ -54,7 +54,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
         protected string GetFullFilePath(string fileName)
         {
-            return $"{dataFolderDirectoryPath}/{fileName}{fileExtension}";
+            return $"{DataFolderDirectoryPath}/{fileName}{FileExtension}";
         }
     }
 }

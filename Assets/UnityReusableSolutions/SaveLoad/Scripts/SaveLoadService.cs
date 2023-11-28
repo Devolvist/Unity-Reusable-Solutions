@@ -9,14 +9,19 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
     public class SaveLoadService : MonoSingleton<SaveLoadService>
     {
-        [SerializeField] private SaveLoadConfig _config;
-        private DeviceReadWriteData _deviceReadWriteData;
+        [SerializeField] private LocalSaveLoadConfig _localSaveLoadConfig;
+        private LocalDataReadWrite _localReadWriteData;
 
         private static List<ISavable> _registeredSavableObjects;
 
         protected override void InitializeOnAwake()
         {
-            _deviceReadWriteData = new BinaryDataReadWrite(_config.SavesDataFolderName);
+            string localFolderName =
+                _localSaveLoadConfig != null ?
+                _localSaveLoadConfig.SavesDataFolderName :
+                LocalSaveLoadConfig.DEFAULT_SAVES_FOLDER_NAME;
+
+            _localReadWriteData = new BinaryDataReadWrite(localFolderName);
         }
 
         /// <returns>
@@ -25,22 +30,22 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
         /// </returns>
         public bool CheckForSavedData()
         {
-            return _deviceReadWriteData.HasWrittenData();
+            return _localReadWriteData.HasWrittenData();
         }
 
         public void SaveData<T>(string id, T data)
         {
-            _deviceReadWriteData.WriteData(id, data);
+            _localReadWriteData.WriteData(id, data);
         }
 
         public T LoadData<T>(string id)
         {
-            return _deviceReadWriteData.ReadData<T>(id);
+            return _localReadWriteData.ReadData<T>(id);
         }
 
         public bool DeleteSavedData(string id)
         {
-            return _deviceReadWriteData.DeleteData(id);
+            return _localReadWriteData.DeleteData(id);
         }
 
         /// <summary>
