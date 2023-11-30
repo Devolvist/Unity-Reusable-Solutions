@@ -1,0 +1,17 @@
+{
+    "name": "CameraShakingExample",
+    "rootNamespace": "Devolvist.UnityReusableSolutions.CameraShakingExample",
+    "references": [
+        "GUID:78101e9cabdab6745ac351ad77dbde0a",
+        "GUID:f85c0a1405e884549b9ca782fc8ac2ee"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
