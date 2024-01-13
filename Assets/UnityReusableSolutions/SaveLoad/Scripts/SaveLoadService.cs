@@ -85,6 +85,21 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
             foreach (ISavable savable in _registeredSavableObjects)
             {
                 savable.DeleteSaves();
+            }
+
+            ResetRegisteredSavableObjectsToDefault();
+        }
+
+        public static void ResetRegisteredSavableObjectsToDefault()
+        {
+            if (_registeredSavableObjects == null)
+                return;
+
+            if (_registeredSavableObjects.Count == 0)
+                return;
+
+            foreach (ISavable savable in _registeredSavableObjects)
+            {
                 savable.ResetToDefault();
             }
         }
@@ -108,8 +123,24 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
         [MenuItem("Local Saves/Delete")]
         private static void DeleteLocalSaves()
-        {        
-            DeleteRegisteredSavableObjectsData();
+        {
+            string savedFilesFolderPath = $"{Application.persistentDataPath}/{LocalSaveLoadConfig.SavableDataFolderName}";
+
+            if (!Directory.Exists(savedFilesFolderPath))
+            {
+                UnityEngine.Debug.LogWarning($"Папка с локальными сохранениями отсутствует.\nЗапрошенный путь: {savedFilesFolderPath}");
+                return;
+            }
+
+            var files = Directory.GetFiles(savedFilesFolderPath);
+
+            foreach (var file in files)
+                File.Delete(file);
+
+            Directory.Delete(savedFilesFolderPath);
+
+            ResetRegisteredSavableObjectsToDefault();
+
             UnityEngine.Debug.Log("Локальные сохранения удалены.");
         }
 #endif
