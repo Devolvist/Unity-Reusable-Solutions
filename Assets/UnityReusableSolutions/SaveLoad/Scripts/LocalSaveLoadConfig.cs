@@ -25,7 +25,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
             {
 #if UNITY_EDITOR
                 return _globalDevelopmentSavesFolderName != string.Empty ?
-                    _globalDevelopmentSavesFolderName : DEFAULT_SAVES_FOLDER_NAME;
+                    _globalDevelopmentSavesFolderName : $"{DEFAULT_SAVES_FOLDER_NAME}_Test";
 #endif
 #pragma warning disable CS0162 // Обнаружен недостижимый код
                 return _globalReleaseSavesFolderName != string.Empty ?
@@ -33,7 +33,17 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
             }
         }
 
+        private void Awake()
+        {
+            SyncFolderNamesData();
+        }
+
         private void OnValidate()
+        {
+            SyncFolderNamesData();
+        }
+
+        private void SyncFolderNamesData()
         {
             _globalDevelopmentSavesFolderName = _developmentSavesFolderName;
             _globalReleaseSavesFolderName = _releaseSavesFolderName;

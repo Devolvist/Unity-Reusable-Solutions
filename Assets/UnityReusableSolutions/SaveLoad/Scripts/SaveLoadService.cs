@@ -14,8 +14,6 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
     {
         private LocalDataReadWrite _localReadWriteData;
 
-        private static List<ISavable> _registeredSavableObjects;
-
         protected override void InitializeOnAwake()
         {
             _localReadWriteData = new BinaryDataReadWrite(LocalSaveLoadConfig.SavableDataFolderName);
@@ -52,23 +50,23 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
         /// </summary>
         public static void Register(ISavable savable)
         {
-            _registeredSavableObjects ??= new List<ISavable>();
+            RegisteredSavableObjectsStorage.Objects ??= new List<ISavable>();
 
-            if (_registeredSavableObjects.Contains(savable))
+            if (RegisteredSavableObjectsStorage.Objects.Contains(savable))
                 return;
 
-            _registeredSavableObjects.Add(savable);
+            RegisteredSavableObjectsStorage.Objects.Add(savable);
         }
 
         public static void SaveRegisteredSavableObjects()
         {
-            if (_registeredSavableObjects == null)
+            if (RegisteredSavableObjectsStorage.Objects == null)
                 return;
 
-            if (_registeredSavableObjects.Count == 0)
+            if (RegisteredSavableObjectsStorage.Objects.Count == 0)
                 return;
 
-            foreach (ISavable savable in _registeredSavableObjects)
+            foreach (ISavable savable in RegisteredSavableObjectsStorage.Objects)
             {
                 savable.Save();
             }
@@ -76,13 +74,13 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
         public static void DeleteRegisteredSavableObjectsData()
         {
-            if (_registeredSavableObjects == null)
+            if (RegisteredSavableObjectsStorage.Objects == null)
                 return;
 
-            if (_registeredSavableObjects.Count == 0)
+            if (RegisteredSavableObjectsStorage.Objects.Count == 0)
                 return;
 
-            foreach (ISavable savable in _registeredSavableObjects)
+            foreach (ISavable savable in RegisteredSavableObjectsStorage.Objects)
             {
                 savable.DeleteSaves();
             }
@@ -92,13 +90,13 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
         public static void ResetRegisteredSavableObjectsToDefault()
         {
-            if (_registeredSavableObjects == null)
+            if (RegisteredSavableObjectsStorage.Objects == null)
                 return;
 
-            if (_registeredSavableObjects.Count == 0)
+            if (RegisteredSavableObjectsStorage.Objects.Count == 0)
                 return;
 
-            foreach (ISavable savable in _registeredSavableObjects)
+            foreach (ISavable savable in RegisteredSavableObjectsStorage.Objects)
             {
                 savable.ResetToDefault();
             }
