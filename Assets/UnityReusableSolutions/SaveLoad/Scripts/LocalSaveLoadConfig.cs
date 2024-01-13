@@ -7,27 +7,36 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
     {
         public const string DEFAULT_SAVES_FOLDER_NAME = "Saves";
 
+        private static string _globalDevelopmentSavesFolderName = string.Empty;
+        private static string _globalReleaseSavesFolderName = string.Empty;
+
         [Tooltip("Название папки с локальными сохранениями для теста при разработке.")]
-        [SerializeField] private string _developmentSavesFolderName = $"{DEFAULT_SAVES_FOLDER_NAME}_Test";
+        [SerializeField, Delayed] private string _developmentSavesFolderName = $"{DEFAULT_SAVES_FOLDER_NAME}_Test";
 
         [Tooltip("Название папки с локальными сохранениями в релизной версии.")]
-        [SerializeField] private string _releaseSavesFolderName = DEFAULT_SAVES_FOLDER_NAME;
+        [SerializeField, Delayed] private string _releaseSavesFolderName = DEFAULT_SAVES_FOLDER_NAME;
 
         /// <summary>
         /// Название папки с локальными сохранениями.
         /// </summary>
-        public string SavesDataFolderName
+        public static string SavableDataFolderName
         {
             get
             {
 #if UNITY_EDITOR
-                return _developmentSavesFolderName != string.Empty ?
-                    _developmentSavesFolderName : DEFAULT_SAVES_FOLDER_NAME;
+                return _globalDevelopmentSavesFolderName != string.Empty ?
+                    _globalDevelopmentSavesFolderName : DEFAULT_SAVES_FOLDER_NAME;
 #endif
 #pragma warning disable CS0162 // Обнаружен недостижимый код
-                return _releaseSavesFolderName != string.Empty ?
-                    _releaseSavesFolderName : DEFAULT_SAVES_FOLDER_NAME;
+                return _globalReleaseSavesFolderName != string.Empty ?
+                    _globalReleaseSavesFolderName : DEFAULT_SAVES_FOLDER_NAME;
             }
+        }
+
+        private void OnValidate()
+        {
+            _globalDevelopmentSavesFolderName = _developmentSavesFolderName;
+            _globalReleaseSavesFolderName = _releaseSavesFolderName;
         }
     }
 }

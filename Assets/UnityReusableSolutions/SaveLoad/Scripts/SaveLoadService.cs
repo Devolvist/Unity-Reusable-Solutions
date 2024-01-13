@@ -1,5 +1,8 @@
 using Devolvist.UnityReusableSolutions.Singleton;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 namespace Devolvist.UnityReusableSolutions.SaveLoad
@@ -9,20 +12,13 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
     public class SaveLoadService : MonoSingleton<SaveLoadService>
     {
-        [SerializeField] private LocalSaveLoadConfig _localSaveLoadConfig;
-
         private LocalDataReadWrite _localReadWriteData;
 
         private static List<ISavable> _registeredSavableObjects;
 
         protected override void InitializeOnAwake()
         {
-            string localFolderName =
-                _localSaveLoadConfig != null ?
-                _localSaveLoadConfig.SavesDataFolderName :
-                LocalSaveLoadConfig.DEFAULT_SAVES_FOLDER_NAME;
-
-            _localReadWriteData = new BinaryDataReadWrite(localFolderName);
+            _localReadWriteData = new BinaryDataReadWrite(LocalSaveLoadConfig.SavableDataFolderName);
         }
 
         /// <returns>
@@ -49,7 +45,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
             return _localReadWriteData.DeleteData(id);
         }
 
-        #region Operations_with_registered_clients
+        #region STATIC_OPERATIONS_WITH_REGISTERED_CLIENTS
         /// <summary>
         /// Регистрация сохраняемого объекта для автоматического вызова методов его интерфейса.
         /// Повторная регистрация не засчитывается.
@@ -64,21 +60,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
             _registeredSavableObjects.Add(savable);
         }
 
-        public void DeleteRegisteredSavableObjectsData()
-        {
-            if (_registeredSavableObjects == null)
-                return;
-
-            if (_registeredSavableObjects.Count == 0)
-                return;
-
-            foreach (ISavable savable in _registeredSavableObjects)
-            {
-                savable.DeleteSaves();
-            }
-        }
-
-        public void SaveRegisteredSavableObjects()
+        public static void SaveRegisteredSavableObjects()
         {
             if (_registeredSavableObjects == null)
                 return;
@@ -91,12 +73,46 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
                 savable.Save();
             }
         }
+
+        public static void DeleteRegisteredSavableObjectsData()
+        {
+            if (_registeredSavableObjects == null)
+                return;
+
+            if (_registeredSavableObjects.Count == 0)
+                return;
+
+            foreach (ISavable savable in _registeredSavableObjects)
+            {
+                savable.DeleteSaves();
+                savable.ResetToDefault();
+            }
+        }
         #endregion
 
-        // Есть подозрение что в сборке данные портятся при сохранении при выходе.
-        //private void OnApplicationQuit()
-        //{
-        //    SaveRegisteredSavableObjects();
-        //}
+        #region EDITOR_MENU_ITEMS
+#if UNITY_EDITOR
+        [UnityEditor.MenuItem("Local Saves/Open Folder")]
+        private static void OpenLocalSavesFolder()
+        {
+            string savesFolderPath = $"{Application.persistentDataPath}/{LocalSaveLoadConfig.SavableDataFolderName}";
+
+            if (!Directory.Exists(savesFolderPath))
+            {
+                UnityEngine.Debug.LogWarning($"Папка с локальными сохранениями отсутствует.\nЗапрошенный путь: {savesFolderPath}");
+                return;
+            }
+
+            Process.Start($"{Application.persistentDataPath}/{LocalSaveLoadConfig.SavableDataFolderName}");
+        }
+
+        [MenuItem("Local Saves/Delete")]
+        private static void DeleteLocalSaves()
+        {        
+            DeleteRegisteredSavableObjectsData();
+            UnityEngine.Debug.Log("Локальные сохранения удалены.");
+        }
+#endif
+        #endregion
     }
 }

@@ -37,10 +37,9 @@ namespace Devolvist.UnityReusableSolutions.SaveLoadExample
         {
             SaveLoadService.Instance.DeleteSavedData(_saveId);
 
-            RestoreHealth();
+            ResetToDefault();
         }
-
-        private void RestoreHealth()
+        public void ResetToDefault()
         {
             _health = MAX_HEALTH;
         }

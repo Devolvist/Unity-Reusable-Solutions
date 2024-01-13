@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf301d018b2169b42a024321a219f944, type: 3}
   m_Name: LocalSaveLoadConfig_Default
   m_EditorClassIdentifier: 
-  _developmentSavesDataFolderName: Test_Saves
-  _releaseSavesDataFolderName: Release_Saves
+  _developmentSavesFolderName: Saves_Test
+  _releaseSavesFolderName: Saves

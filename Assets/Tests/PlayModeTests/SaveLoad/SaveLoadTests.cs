@@ -75,6 +75,11 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
             {
                 SaveLoadService.Instance.SaveData("Mock_Save", DEFAULT_MESSAGE);
             }
+
+            public void ResetToDefault()
+            {
+                Message = DEFAULT_MESSAGE;
+            }
         }
         #endregion
     }

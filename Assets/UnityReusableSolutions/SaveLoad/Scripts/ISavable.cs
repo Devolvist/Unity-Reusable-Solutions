@@ -10,5 +10,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
         void Load();
 
         void DeleteSaves();
+
+        void ResetToDefault();
     }
 }
