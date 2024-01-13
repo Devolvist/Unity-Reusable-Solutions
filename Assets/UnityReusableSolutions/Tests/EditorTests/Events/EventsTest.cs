@@ -1,7 +1,6 @@
 using Devolvist.UnityReusableSolutions.Events;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 namespace Devolvist.UnityReusableSolutions.EditorTests
 {
@@ -134,27 +133,6 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
             testableEvent.Subscribe(mockClass1.MockClassAction);
 
             Assert.IsTrue(testableEvent.SubscribersCount == 2);
-        }
-
-        [Test]
-        public void Is_Failed_Publish_When_0_Subscribers()
-        {
-            ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
-
-            bool successfulPublish = testableEvent.Publish();
-
-            Assert.IsTrue(!successfulPublish);
-        }
-
-        [Test]
-        public void Is_Successful_Publish_When_1_Subscribers()
-        {
-            ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
-
-            testableEvent.Subscribe(MockAction);
-            bool successfulPublish = testableEvent.Publish();
-
-            Assert.IsTrue(successfulPublish);
         }
 
         [Test]

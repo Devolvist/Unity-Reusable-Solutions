@@ -101,14 +101,14 @@ namespace Devolvist.UnityReusableSolutions.Events
         /// True - успешно инициировано.
         /// False - не инициировано.
         /// </returns>
-        public bool Publish()
+        public void Publish()
         {
             if (_subscribers == null)
             {
                 if (_logAccessingNonExistentSubscribersListError)
                     LogAccessingNonExistentSubscribersListError();
 
-                return false;
+                return;
             }
 
             if (_subscribers.Count == 0)
@@ -116,13 +116,11 @@ namespace Devolvist.UnityReusableSolutions.Events
                 if (_logPublishingWithoutSubscribers)
                     Debug.LogWarning($"Попытка публикации события {name} без подписчиков. Отмена операции.");
 
-                return false;
+                return;
             }
 
             for (int i = 0; i < _subscribers.Count; i++)
                 _subscribers[i]?.Invoke();
-
-            return true;
         }
 
         [ContextMenu(nameof(LogInfo))]
