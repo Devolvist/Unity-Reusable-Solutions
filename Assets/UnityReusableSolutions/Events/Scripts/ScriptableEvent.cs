@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 namespace Devolvist.UnityReusableSolutions.Events
@@ -62,7 +61,7 @@ namespace Devolvist.UnityReusableSolutions.Events
             if (_subscribers.Contains(newSubscriber))
             {
                 if (_logReSubscription)
-                    Debug.LogWarning($"Попытка повторного добавления {newSubscriber} в список подписчиков события {name}. Отмена операции.");
+                    Debug.LogWarning($"Попытка повторного добавления {newSubscriber.Method.Name} в список подписчиков события {name}. Отмена операции.");
 
                 return;
             }
@@ -70,7 +69,7 @@ namespace Devolvist.UnityReusableSolutions.Events
             _subscribers.Add(newSubscriber);
 
             if (_logSubscription)
-                Debug.Log($"{newSubscriber} подписался на событие {name}.");
+                Debug.Log($"{newSubscriber.Method.Name} подписался на событие {name}.");
         }
 
         public void Unsubscribe(Action subscriber)
@@ -86,7 +85,7 @@ namespace Devolvist.UnityReusableSolutions.Events
             if (!_subscribers.Contains(subscriber))
             {
                 if (_logNonExistentSubscriberDeleting)
-                    Debug.LogError($"Попытка удалить несуществующего подписчика {subscriber} из списка подписчиков события {name}.");
+                    Debug.LogError($"Попытка удалить несуществующего подписчика {subscriber.Method.Name} из списка подписчиков события {name}.");
 
                 return;
             }
@@ -94,7 +93,7 @@ namespace Devolvist.UnityReusableSolutions.Events
             _subscribers.Remove(subscriber);
 
             if (_logUnsubscription)
-                Debug.Log($"{subscriber} отписался от события {name}.");
+                Debug.Log($"{subscriber.Method.Name} отписался от события {name}.");
         }
 
         /// <returns>
@@ -119,18 +118,17 @@ namespace Devolvist.UnityReusableSolutions.Events
                 return;
             }
 
-            for (int i = 0; i < _subscribers.Count; i++)
+            for (int i = _subscribers.Count - 1; i >= 0; i--)
                 _subscribers[i]?.Invoke();
         }
 
-        [ContextMenu(nameof(LogInfo))]
         public void LogInfo()
         {
-            if (_subscribers == null)
+            if (_subscribers == null | SubscribersCount == 0)
+            {
+                Debug.Log($"{name} не имеет подписчиков.");
                 return;
-
-            if (SubscribersCount == 0) 
-                return;
+            }
 
             string message = $"Имя события: {name}\nКол-во подписчиков: {SubscribersCount}\n\nПодробная информация о подписчиках:\n\n";
 

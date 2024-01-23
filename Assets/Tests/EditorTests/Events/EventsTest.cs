@@ -85,8 +85,8 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         public void Is_2_Subscribers_When_2_Different_Objects_Subscribes()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
-            MockClass mockClass = new MockClass();
-            MockClass mockClass1 = new MockClass();
+            MockSubscriber mockClass = new MockSubscriber();
+            MockSubscriber mockClass1 = new MockSubscriber();
             
             testableEvent.Subscribe(mockClass.MockClassAction);
             testableEvent.Subscribe(mockClass1.MockClassAction);
@@ -98,8 +98,8 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         public void Is_1_Subscriber_When_2_Different_Objects_Subscribes_Then_1_Unsubscribe()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
-            MockClass mockClass = new MockClass();
-            MockClass mockClass1 = new MockClass();
+            MockSubscriber mockClass = new MockSubscriber();
+            MockSubscriber mockClass1 = new MockSubscriber();
 
             testableEvent.Subscribe(mockClass.MockClassAction);
             testableEvent.Subscribe(mockClass1.MockClassAction);
@@ -124,8 +124,8 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         public void Is_2_Subscribers_When_2_Different_Objects_Subscribes_Twice()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
-            MockClass mockClass = new MockClass();
-            MockClass mockClass1 = new MockClass();
+            MockSubscriber mockClass = new MockSubscriber();
+            MockSubscriber mockClass1 = new MockSubscriber();
 
             testableEvent.Subscribe(mockClass.MockClassAction);
             testableEvent.Subscribe(mockClass.MockClassAction);
@@ -146,18 +146,58 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
             Assert.IsTrue(testableEvent.SubscribersCount == 0);
         }
 
+        [Test]
+        public void Is_All_Subscribers_Invoked_When_1_Subscriber_Unsubscribed_At_Process()
+        {
+            ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
+            MockSubscriber_1 subscriber = new MockSubscriber_1(testableEvent);
+            MockSubscriber_2 subscriber1 = new MockSubscriber_2(testableEvent);
+
+            testableEvent.Publish();
+
+            Assert.IsTrue(testableEvent.SubscribersCount == 1 && subscriber1.IsEventHandled);
+        }
+
         private void MockAction() { }
         private void MockAction_1() { }
 
-        private class MockClass
+        private class MockSubscriber
         {
             public void MockClassAction() { }
         }
 
-        //[UnityTest]
-        //public IEnumerator EventsTestWithEnumeratorPasses()
-        //{
-        //    yield return null;
-        //}
+        private class MockSubscriber_1
+        {
+            public ScriptableEvent Event { get; set; }
+
+            public MockSubscriber_1(ScriptableEvent scriptableEvent)
+            {
+                Event = scriptableEvent;
+                Event.Subscribe(HandleEventAndUnsubscribe);
+            }
+
+            public void HandleEventAndUnsubscribe()
+            {
+                Event.Unsubscribe(HandleEventAndUnsubscribe);
+            }
+        }
+
+        private class MockSubscriber_2
+        {
+            public ScriptableEvent Event { get; set; }
+
+            public bool IsEventHandled { get; private set; } = false;
+
+            public MockSubscriber_2(ScriptableEvent scriptableEvent)
+            {
+                Event = scriptableEvent;
+                Event.Subscribe(HandleEvent);
+            }
+
+            public void HandleEvent()
+            {
+                IsEventHandled = true;
+            }
+        }
     }
 }
