@@ -16,7 +16,20 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
         protected override void InitializeOnAwake()
         {
-            _localReadWriteData = new BinaryDataReadWrite(LocalSaveLoadConfig.SavableDataFolderName);
+            InitLocalDataHandler();
+        }
+
+        private void InitLocalDataHandler()
+        {
+            switch (LocalSaveLoadConfig.DataReadWriteType)
+            {
+                case DataReadWriteType.Binary:
+                    _localReadWriteData = new BinaryDataReadWrite(LocalSaveLoadConfig.SavableDataFolderName);
+                    break;
+                case DataReadWriteType.Json:
+                    _localReadWriteData = new LocalJsonDataReadWrite(LocalSaveLoadConfig.SavableDataFolderName);
+                    break;
+            }
         }
 
         /// <returns>
