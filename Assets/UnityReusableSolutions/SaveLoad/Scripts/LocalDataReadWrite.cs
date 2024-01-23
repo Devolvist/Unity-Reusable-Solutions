@@ -16,12 +16,12 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
                 Directory.CreateDirectory(DataFolderDirectoryPath);
         }
 
-        protected string FileExtension;
-
         /// <summary>
         /// Путь к папке c файлами данных.
         /// </summary>
         protected readonly string DataFolderDirectoryPath;
+
+        protected abstract string FileExtension { get; }
 
         public override bool HasWrittenData()
         {

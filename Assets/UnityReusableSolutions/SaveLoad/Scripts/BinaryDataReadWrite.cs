@@ -8,9 +8,10 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
     {
         private BinaryFormatter _formatter;
 
+        protected override string FileExtension => ".save";
+
         public BinaryDataReadWrite(string dataFolderName) : base(dataFolderName)
         {
-            FileExtension = ".save";
             _formatter = new BinaryFormatter();
         }
 

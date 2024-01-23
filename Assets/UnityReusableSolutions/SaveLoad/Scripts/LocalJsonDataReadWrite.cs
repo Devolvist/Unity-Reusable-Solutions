@@ -5,10 +5,9 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 {
     public class LocalJsonDataReadWrite : LocalDataReadWrite
     {
-        public LocalJsonDataReadWrite(string dataFolderName) : base(dataFolderName)
-        {
-            FileExtension = "json";
-        }
+        protected override string FileExtension => ".json";
+
+        public LocalJsonDataReadWrite(string dataFolderName) : base(dataFolderName) { }
 
         public override T ReadData<T>(string id)
         {
