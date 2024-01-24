@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _developmentSavesFolderName: Saves_Test
   _releaseSavesFolderName: Saves
-  _dataReadWriteType: 1
+  _dataReadWriteType: 0

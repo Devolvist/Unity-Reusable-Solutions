@@ -139,13 +139,16 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
             if (LocalSaveLoadConfig.DataReadWriteType == DataReadWriteType.PlayerPrefs)
             {
                 PlayerPrefs.DeleteAll();
+                UnityEngine.Debug.Log("Данные в PlayerPrefs удалены.");
             }
+
+            ResetRegisteredSavableObjectsToDefault();
 
             string savedFilesFolderPath = $"{Application.persistentDataPath}/{LocalSaveLoadConfig.SavableDataFolderName}";
 
             if (!Directory.Exists(savedFilesFolderPath))
             {
-                UnityEngine.Debug.LogWarning($"Папка с локальными сохранениями отсутствует.\nЗапрошенный путь: {savedFilesFolderPath}");
+                UnityEngine.Debug.LogWarning($"Локальных сохранений нет. Папка с локальными сохранениями отсутствует.\nЗапрошенный путь: {savedFilesFolderPath}");
                 return;
             }
 
@@ -155,8 +158,6 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
                 File.Delete(file);
 
             Directory.Delete(savedFilesFolderPath);
-
-            ResetRegisteredSavableObjectsToDefault();
 
             UnityEngine.Debug.Log("Локальные сохранения удалены.");
         }
