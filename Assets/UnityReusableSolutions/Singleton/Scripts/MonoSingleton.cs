@@ -31,5 +31,22 @@ namespace Devolvist.UnityReusableSolutions.Singleton
         /// Для переопределения (не требует вызова базового варианта).
         /// </summary>
         protected virtual void InitializeOnAwake() { }
+
+#if UNITY_EDITOR
+        /// <summary>
+        /// Присвоить активному экземпляру null, если он в данный момент иницииализирован.
+        /// </summary>
+        public static void ResetInstance()
+        {
+            if (Instance == null)
+            {
+                Debug.LogWarning($"Синглтона {typeof(T)} в данный момент не существует.");
+                return;
+            }
+
+            Instance = null;
+            Debug.Log($"Синглтон {typeof(T)} успешно аннулирован.");
+        }
+#endif
     }
 }

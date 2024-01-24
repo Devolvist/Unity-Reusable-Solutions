@@ -9,7 +9,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
         private static string _globalDevelopmentSavesFolderName = string.Empty;
         private static string _globalReleaseSavesFolderName = string.Empty;
-        private static DataReadWriteType _globalDataReadWriteType = DataReadWriteType.Json;
+        private static DataReadWriteType _globalDataReadWriteType = DataReadWriteType.Binary;
 
         [Tooltip("Название папки с локальными сохранениями для теста при разработке.")]
         [SerializeField, Delayed] private string _developmentSavesFolderName = $"{DEFAULT_SAVES_FOLDER_NAME}_Test";
@@ -18,7 +18,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
         [SerializeField, Delayed] private string _releaseSavesFolderName = DEFAULT_SAVES_FOLDER_NAME;
 
         [Tooltip("Тип локальной обработки сохраняемых данных.")]
-        [SerializeField] private DataReadWriteType _dataReadWriteType = DataReadWriteType.Json;
+        [SerializeField] private DataReadWriteType _dataReadWriteType = DataReadWriteType.Binary;
 
         /// <summary>
         /// Название папки с локальными сохранениями.
@@ -37,13 +37,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
             }
         }
 
-        public static DataReadWriteType DataReadWriteType
-        {
-            get 
-            {
-                return _globalDataReadWriteType;
-            }
-        }
+        public static DataReadWriteType DataReadWriteType => _globalDataReadWriteType;
 
         private void Awake()
         {
@@ -55,6 +49,11 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
             SyncGlobals();
         }
 
+#if UNITY_EDITOR
+        public static void SetGlobalDataReadWriteType(DataReadWriteType dataReadWriteType) =>
+            _globalDataReadWriteType = dataReadWriteType;
+#endif
+
         private void SyncGlobals()
         {
             _globalDevelopmentSavesFolderName = _developmentSavesFolderName;
@@ -65,7 +64,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
     public enum DataReadWriteType
     {
+        PlayerPrefs,
         Binary,
-        Json
     }
 }

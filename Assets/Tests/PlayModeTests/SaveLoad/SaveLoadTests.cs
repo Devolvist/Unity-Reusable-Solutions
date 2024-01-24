@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Devolvist.UnityReusableSolutions.SaveLoad;
+using Devolvist.UnityReusableSolutions.Singleton;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -10,75 +11,262 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
     [Category("SaveLoad")]
     public class SaveLoadTests
     {
-        //[Test]
-        //public void SaveLoadTestsSimplePasses()
-        //{           
-        //}
-
         /// <summary>
-        /// Возврат false при запросе на проверку наличия сохранений при реальном отсутствии сохранений.
+        /// Возврат false при запросе на проверку наличия сохранений при реальном отсутствии сохранений типа Binary.
         /// </summary>
         [UnityTest]
-        public IEnumerator Check_Is_False_When_Unavailable_Saves()
+        public IEnumerator Check_Is_False_When_Unavailable_BinarySaves()
         {
+            DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.Binary);
+
+            MonoSingleton<SaveLoadService>.ResetInstance();
             GameObject.CreatePrimitive(PrimitiveType.Cube).AddComponent<SaveLoadService>();
 
             while (SaveLoadService.Instance == null)
                 yield return null;
 
+            SaveLoadService.DeleteLocalSaves();
             bool savedDataAvailable = SaveLoadService.Instance.CheckForSavedData();
 
             Assert.IsFalse(savedDataAvailable);
-        }
+            SaveLoadService.DeleteLocalSaves();
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(lastReadWriteType);
+        }     
 
         /// <summary>
-        /// Возврат true при запросе на проверку наличия сохранений при реальном наличии сохранений.
+        /// Возврат false при запросе на проверку наличия сохранений при реальном отсутствии сохранений типа PlayerPrefs.
         /// </summary>
         [UnityTest]
-        public IEnumerator Check_Saves_Is_True_When_Available_Saves()
+        public IEnumerator Check_Is_False_When_Unavailable_PlayerPrefsSaves()
         {
+            DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.PlayerPrefs);
+
+            MonoSingleton<SaveLoadService>.ResetInstance();
             GameObject.CreatePrimitive(PrimitiveType.Cube).AddComponent<SaveLoadService>();
 
             while (SaveLoadService.Instance == null)
                 yield return null;
 
-            ISavable savableClient = new MockSavableClient();
-            savableClient.Save();
+            SaveLoadService.DeleteLocalSaves();
             bool savedDataAvailable = SaveLoadService.Instance.CheckForSavedData();
 
-            Assert.IsTrue(savedDataAvailable);
+            Assert.IsFalse(savedDataAvailable);
+            SaveLoadService.DeleteLocalSaves();
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(lastReadWriteType);
+        }
 
-            savableClient.DeleteSaves();
+        /// <summary>
+        /// Возврат true при запросе на проверку наличия сохранений при реальном наличии сохранений типа Binary.
+        /// </summary>
+        [UnityTest]
+        public IEnumerator Check_Saves_Is_True_When_Available_BinarySaves()
+        {
+            DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.Binary);
+
+            MonoSingleton<SaveLoadService>.ResetInstance();
+            GameObject.CreatePrimitive(PrimitiveType.Cube).AddComponent<SaveLoadService>();
+
+            while (SaveLoadService.Instance == null)
+                yield return null;
+
+            MockSavableClientWithStringProperty savableClient = new MockSavableClientWithStringProperty();
+            savableClient.Save();
+            savableClient.Load();
+            bool savedDataLoadedSuccessfully = savableClient.Message == MockSavableClientWithStringProperty.EXPECTED_MESSAGE;
+
+            Assert.IsTrue(savedDataLoadedSuccessfully);
+            SaveLoadService.DeleteLocalSaves();
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(lastReadWriteType);
+        }
+
+        /// <summary>
+        /// Возврат true при запросе на проверку наличия сохранений при реальном наличии сохранений типа PlayerPrefs.
+        /// </summary>
+        [UnityTest]
+        public IEnumerator Check_Saves_Is_True_When_Available_PlayerPrefsSaves()
+        {
+            DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.PlayerPrefs);
+
+            MonoSingleton<SaveLoadService>.ResetInstance();
+            GameObject.CreatePrimitive(PrimitiveType.Cube).AddComponent<SaveLoadService>();
+
+            while (SaveLoadService.Instance == null)
+                yield return null;
+
+            MockSavableClientWithStringProperty savableClient = new MockSavableClientWithStringProperty();
+            savableClient.Save();
+            savableClient.Load();
+            bool savedDataLoadedSuccessfully = savableClient.Message == MockSavableClientWithStringProperty.EXPECTED_MESSAGE;
+
+            Assert.IsTrue(savedDataLoadedSuccessfully);
+            SaveLoadService.DeleteLocalSaves();
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(lastReadWriteType);
+        }
+
+        /// <summary>
+        /// Успешная загрузка ранее сохранённой строки через Binary.
+        /// </summary>
+        [UnityTest]
+        public IEnumerator Successfully_Load_Afer_Saving_String_In_Binary()
+        {
+            DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.Binary);
+
+            MonoSingleton<SaveLoadService>.ResetInstance();
+            GameObject.CreatePrimitive(PrimitiveType.Cube).AddComponent<SaveLoadService>();
+
+            while (SaveLoadService.Instance == null)
+                yield return null;
+
+            MockSavableClientWithGenericProperty<string> savableClient = new MockSavableClientWithGenericProperty<string>();
+            savableClient.Property = "Hello";
+            savableClient.Save();
+            savableClient.Property = null;
+            savableClient.Load();
+
+            Assert.IsTrue(savableClient.Property == "Hello");
+            SaveLoadService.DeleteLocalSaves();
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(lastReadWriteType);
+        }
+
+        /// <summary>
+        /// Успешная загрузка ранее сохранённой строки через PlayerPrefs.
+        /// </summary>
+        [UnityTest]
+        public IEnumerator Successfully_Load_Afer_Saving_String_In_PlayerPrefs()
+        {
+            DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.PlayerPrefs);
+
+            MonoSingleton<SaveLoadService>.ResetInstance();
+            GameObject.CreatePrimitive(PrimitiveType.Cube).AddComponent<SaveLoadService>();
+
+            while (SaveLoadService.Instance == null)
+                yield return null;
+
+            MockSavableClientWithGenericProperty<string> savableClient = new MockSavableClientWithGenericProperty<string>();
+            savableClient.Property = "Hello";
+            savableClient.Save();
+            savableClient.Property = null;
+            savableClient.Load();
+
+            Assert.IsTrue(savableClient.Property == "Hello");
+            SaveLoadService.DeleteLocalSaves();
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(lastReadWriteType);
+        }
+
+        /// <summary>
+        /// Успешная загрузка ранее сохранённого целого числа через Binary.
+        /// </summary>
+        [UnityTest]
+        public IEnumerator Successfully_Load_Afer_Saving_Int_In_Binary()
+        {
+            DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.Binary);
+
+            MonoSingleton<SaveLoadService>.ResetInstance();
+            GameObject.CreatePrimitive(PrimitiveType.Cube).AddComponent<SaveLoadService>();
+
+            while (SaveLoadService.Instance == null)
+                yield return null;
+
+            MockSavableClientWithGenericProperty<int> savableClient = new MockSavableClientWithGenericProperty<int>();
+            savableClient.Property = 7;
+            savableClient.Save();
+            savableClient.Property = 0;
+            savableClient.Load();
+
+            Assert.IsTrue(savableClient.Property == 7);
+            SaveLoadService.DeleteLocalSaves();
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(lastReadWriteType);
+        }
+
+        /// <summary>
+        /// Успешная загрузка ранее сохранённого целого числа через PlayerPrefs.
+        /// </summary>
+        [UnityTest]
+        public IEnumerator Successfully_Load_Afer_Saving_Int_In_PlayerPrefs()
+        {
+            DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.PlayerPrefs);
+
+            MonoSingleton<SaveLoadService>.ResetInstance();
+            GameObject.CreatePrimitive(PrimitiveType.Cube).AddComponent<SaveLoadService>();
+
+            while (SaveLoadService.Instance == null)
+                yield return null;
+
+            MockSavableClientWithGenericProperty<int> savableClient = new MockSavableClientWithGenericProperty<int>();
+            savableClient.Property = 7;
+            savableClient.Save();
+            savableClient.Property = 0;
+            savableClient.Load();
+
+            Assert.IsTrue(savableClient.Property == 7);
+            SaveLoadService.DeleteLocalSaves();
+            LocalSaveLoadConfig.SetGlobalDataReadWriteType(lastReadWriteType);
         }
 
         #region Mocks
         /// <summary>
         /// Имитация объекта с сохраняемыми данными.
         /// </summary>
-        private class MockSavableClient : ISavable
+        private class MockSavableClientWithStringProperty : ISavable
         {
-            public const string DEFAULT_MESSAGE = "Hello";
+            private const string SAVE_ID = "Mock_Save";
+            public const string EXPECTED_MESSAGE = "Hello";
 
-            public string Message { get; private set; } 
+            public string Message { get; private set; } = null;
 
             public void DeleteSaves()
             {
-                SaveLoadService.Instance.DeleteSavedData("Mock_Save");
-            }         
+                SaveLoadService.Instance.DeleteSavedData(SAVE_ID);
+            }
 
             public void Load()
             {
-                Message = SaveLoadService.Instance.LoadData<string>("Mock_Save");
+                Message = SaveLoadService.Instance.LoadData<string>(SAVE_ID);
             }
 
             public void Save()
             {
-                SaveLoadService.Instance.SaveData("Mock_Save", DEFAULT_MESSAGE);
+                SaveLoadService.Instance.SaveData(SAVE_ID, EXPECTED_MESSAGE);
             }
 
             public void ResetToDefault()
             {
-                Message = DEFAULT_MESSAGE;
+                Message = null;
+            }
+        }
+
+        private class MockSavableClientWithGenericProperty<T> : ISavable
+        {
+            private const string SAVE_ID = "Mock_Save_1";
+
+            public T Property { get; set; } = default;
+
+            public void DeleteSaves()
+            {
+                SaveLoadService.Instance.DeleteSavedData(SAVE_ID);
+            }
+
+            public void Load()
+            {
+                Property = SaveLoadService.Instance.LoadData<T>(SAVE_ID);
+            }
+
+            public void Save()
+            {
+                SaveLoadService.Instance.SaveData(SAVE_ID, Property);
+            }
+
+            public void ResetToDefault()
+            {
+               Property = default;
             }
         }
         #endregion

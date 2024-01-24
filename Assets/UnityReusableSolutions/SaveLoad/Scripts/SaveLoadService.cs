@@ -12,7 +12,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
     public class SaveLoadService : MonoSingleton<SaveLoadService>
     {
-        private LocalDataReadWrite _localReadWriteData;
+        private ReadWriteData _localReadWriteData;
 
         protected override void InitializeOnAwake()
         {
@@ -23,11 +23,12 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
         {
             switch (LocalSaveLoadConfig.DataReadWriteType)
             {
+                case DataReadWriteType.PlayerPrefs:
+                    _localReadWriteData = new PlayerPrefsService();
+                    break;
+
                 case DataReadWriteType.Binary:
                     _localReadWriteData = new BinaryDataReadWrite(LocalSaveLoadConfig.SavableDataFolderName);
-                    break;
-                case DataReadWriteType.Json:
-                    _localReadWriteData = new LocalJsonDataReadWrite(LocalSaveLoadConfig.SavableDataFolderName);
                     break;
             }
         }
@@ -133,8 +134,13 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
         }
 
         [MenuItem("Local Saves/Delete")]
-        private static void DeleteLocalSaves()
+        public static void DeleteLocalSaves()
         {
+            if (LocalSaveLoadConfig.DataReadWriteType == DataReadWriteType.PlayerPrefs)
+            {
+                PlayerPrefs.DeleteAll();
+            }
+
             string savedFilesFolderPath = $"{Application.persistentDataPath}/{LocalSaveLoadConfig.SavableDataFolderName}";
 
             if (!Directory.Exists(savedFilesFolderPath))
