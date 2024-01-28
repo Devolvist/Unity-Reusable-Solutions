@@ -6,20 +6,10 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
 {
     [Category("Events")]
     public class EventsTest
-    {
-        // Синтаксис методов:
-
-        // Ожидаемый_Результат_При_Заданных_Условиях()
-        // {
-        //    1. Инициализация тестируемых объектов.
-        //    2. Выполнение тестируемой логики при заданных условиях (если требуется).
-        //    3. Утверждение ожидаемого результата.
-        // }
-        //
-        // Подчеркивания добавлены для удобочитаемости в окне Test Runner.
-        
+    {      
         [Test]
-        public void Is_0_Subscribers_When_Instance_Created()
+        [Description("0 подписчиков при создании экз. события.")]
+        public void Is0SubscribersWhenInstanceCreated()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
 
@@ -27,7 +17,8 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        public void Is_1_Subscriber_When_Subscribe_Single()
+        [Description("1 подписчик при единоразовой подписке одного метода.")]
+        public void Is1SubscriberWhenSubscribeSingle()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
 
@@ -37,7 +28,8 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        public void Is_1_Subscriber_When_Subscribe_Twice()
+        [Description("1 подписчик после повторной подписки того же метода.")]
+        public void Is1SubscriberWhenSubscribeTwice()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
 
@@ -48,7 +40,8 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        public void Is_0_Subscribers_When_Subscribe_Then_Unsubscribe()
+        [Description("0 подписчиков, когда один метод подписался и отписался.")]
+        public void Is0SubscribersWhenSubscribeThenUnsubscribe()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
 
@@ -59,7 +52,8 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        public void Is_2_Subscribers_When_2_Different_Actions_Subscribes()
+        [Description("2 подписчика, когда два разных метода подписались.")]
+        public void Is2SubscribersWhen2DifferentActionsSubscribes()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
 
@@ -70,7 +64,8 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        public void Is_1_Subscriber_When_2_Different_Actions_Subscribes_Then_1_Unsubscribe()
+        [Description("1 подписчик, когда два разных метода подписались, затем один из них отписался.")]
+        public void Is1SubscriberWhen2DifferentActionsSubscribesThen1Unsubscribe()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
 
@@ -82,7 +77,8 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        public void Is_2_Subscribers_When_2_Different_Objects_Subscribes()
+        [Description("2 подписчика, когда два разных клиента подписались.")]
+        public void Is2SubscribersWhen2DifferentClientsSubscribed()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
             MockSubscriber mockClass = new MockSubscriber();
@@ -95,7 +91,8 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        public void Is_1_Subscriber_When_2_Different_Objects_Subscribes_Then_1_Unsubscribe()
+        [Description("1 подписчик, когда два разных клиента подписались, затем один из них отписался.")]
+        public void Is1SubscriberWhen2DifferentClientsSubscribeThen1Unsubscribed()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
             MockSubscriber mockClass = new MockSubscriber();
@@ -109,7 +106,8 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        public void Is_0_Subscribers_When_1_Subscribe_Then_Unsubscribe_Twice()
+        [Description("0 подписчиков, когда один метод подписался, затем отписался дважды.")]
+        public void Is0SubscribersWhen1SubscribedThenUnsubscribedTwice()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
 
@@ -121,7 +119,8 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        public void Is_2_Subscribers_When_2_Different_Objects_Subscribes_Twice()
+        [Description("2 подписчика, когда два разных клиента подписались дважды.")]
+        public void Is2SubscribersWhen2DifferentClientsSubscribedTwice()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
             MockSubscriber mockClass = new MockSubscriber();
@@ -136,7 +135,8 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        public void Is_0_Subscribers_When_Data_Cleared_With_Active_Subscriber()
+        [Description("0 подписчиков, когда данные о подписчиках очистились при наличии одного активного подписчика.")]
+        public void Is0SubscribersWhenDataClearedWithActiveSubscriber()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
 
@@ -147,7 +147,8 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        public void Is_All_Subscribers_Invoked_When_1_Subscriber_Unsubscribed_At_Process()
+        [Description("Все подписчики уведомлены, когда один из подписчиков отписался в процессе перебора коллекции подпичиков.")]
+        public void IsAllSubscribersInvokedWhen1SubscriberUnsubscribedAtProcess()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
             MockSubscriber_1 subscriber = new MockSubscriber_1(testableEvent);

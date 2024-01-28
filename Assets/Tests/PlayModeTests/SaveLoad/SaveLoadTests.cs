@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Devolvist.UnityReusableSolutions.SaveLoad;
 using Devolvist.UnityReusableSolutions.Singleton;
@@ -11,11 +10,9 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
     [Category("SaveLoad")]
     public class SaveLoadTests
     {
-        /// <summary>
-        /// ¬озврат false при запросе на проверку наличи€ сохранений при реальном отсутствии сохранений типа Binary.
-        /// </summary>
         [UnityTest]
-        public IEnumerator Check_Is_False_When_Unavailable_BinarySaves()
+        [Description("¬озврат false при запросе на проверку наличи€ сохранений при реальном отсутствии сохранений типа Binary.")]
+        public IEnumerator CheckIsFalseWhenUnavailableBinarySaves()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
             LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.Binary);
@@ -34,11 +31,9 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
             LocalSaveLoadConfig.SetGlobalDataReadWriteType(lastReadWriteType);
         }     
 
-        /// <summary>
-        /// ¬озврат false при запросе на проверку наличи€ сохранений при реальном отсутствии сохранений типа PlayerPrefs.
-        /// </summary>
         [UnityTest]
-        public IEnumerator Check_Is_False_When_Unavailable_PlayerPrefsSaves()
+        [Description("¬озврат false при запросе на проверку наличи€ сохранений при реальном отсутствии сохранений типа PlayerPrefs.")]
+        public IEnumerator CheckIsFalseWhenUnavailablePlayerPrefsSaves()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
             LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.PlayerPrefs);
@@ -57,11 +52,9 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
             LocalSaveLoadConfig.SetGlobalDataReadWriteType(lastReadWriteType);
         }
 
-        /// <summary>
-        /// ¬озврат true при запросе на проверку наличи€ сохранений при реальном наличии сохранений типа Binary.
-        /// </summary>
         [UnityTest]
-        public IEnumerator Check_Saves_Is_True_When_Available_BinarySaves()
+        [Description("¬озврат true при запросе на проверку наличи€ сохранений при реальном наличии сохранений типа Binary.")]
+        public IEnumerator CheckSavesIsTrueWhenAvailableBinarySaves()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
             LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.Binary);
@@ -82,11 +75,9 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
             LocalSaveLoadConfig.SetGlobalDataReadWriteType(lastReadWriteType);
         }
 
-        /// <summary>
-        /// ¬озврат true при запросе на проверку наличи€ сохранений при реальном наличии сохранений типа PlayerPrefs.
-        /// </summary>
         [UnityTest]
-        public IEnumerator Check_Saves_Is_True_When_Available_PlayerPrefsSaves()
+        [Description("¬озврат true при запросе на проверку наличи€ сохранений при реальном наличии сохранений типа PlayerPrefs.")]
+        public IEnumerator CheckSavesIsTrueWhenAvailablePlayerPrefsSaves()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
             LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.PlayerPrefs);
@@ -107,11 +98,9 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
             LocalSaveLoadConfig.SetGlobalDataReadWriteType(lastReadWriteType);
         }
 
-        /// <summary>
-        /// ”спешна€ загрузка ранее сохранЄнной строки через Binary.
-        /// </summary>
         [UnityTest]
-        public IEnumerator Successfully_Load_Afer_Saving_String_In_Binary()
+        [Description("”спешна€ загрузка ранее сохранЄнной строки через Binary.")]
+        public IEnumerator SuccessfullyLoadingAferSavingStringInBinary()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
             LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.Binary);
@@ -133,11 +122,9 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
             LocalSaveLoadConfig.SetGlobalDataReadWriteType(lastReadWriteType);
         }
 
-        /// <summary>
-        /// ”спешна€ загрузка ранее сохранЄнной строки через PlayerPrefs.
-        /// </summary>
         [UnityTest]
-        public IEnumerator Successfully_Load_Afer_Saving_String_In_PlayerPrefs()
+        [Description("”спешна€ загрузка ранее сохранЄнной строки через PlayerPrefs.")]
+        public IEnumerator SuccessfullyLoadingAfterSavingStringInPlayerPrefs()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
             LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.PlayerPrefs);
@@ -159,11 +146,9 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
             LocalSaveLoadConfig.SetGlobalDataReadWriteType(lastReadWriteType);
         }
 
-        /// <summary>
-        /// ”спешна€ загрузка ранее сохранЄнного целого числа через Binary.
-        /// </summary>
         [UnityTest]
-        public IEnumerator Successfully_Load_Afer_Saving_Int_In_Binary()
+        [Description("”спешна€ загрузка ранее сохранЄнного целого числа через Binary.")]
+        public IEnumerator SuccessfullyLoadingAferSavingIntInBinary()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
             LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.Binary);
@@ -185,11 +170,9 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
             LocalSaveLoadConfig.SetGlobalDataReadWriteType(lastReadWriteType);
         }
 
-        /// <summary>
-        /// ”спешна€ загрузка ранее сохранЄнного целого числа через PlayerPrefs.
-        /// </summary>
         [UnityTest]
-        public IEnumerator Successfully_Load_Afer_Saving_Int_In_PlayerPrefs()
+        [Description("”спешна€ загрузка ранее сохранЄнного целого числа через PlayerPrefs.")]
+        public IEnumerator SuccessfullyLoadingAferSavingIntInPlayerPrefs()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
             LocalSaveLoadConfig.SetGlobalDataReadWriteType(DataReadWriteType.PlayerPrefs);
