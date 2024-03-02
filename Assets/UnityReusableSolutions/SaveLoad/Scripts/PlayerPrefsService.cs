@@ -26,13 +26,13 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
             if (!IsValidType(typeof(T)))
             {
-                Debug.LogError($"Невозможно прочитать данные типа {typeof(T).Name} из PlayerPrefs");
+                Debug.LogError($"РќРµРІРѕР·РјРѕР¶РЅРѕ РїСЂРѕС‡РёС‚Р°С‚СЊ РґР°РЅРЅС‹Рµ С‚РёРїР° {typeof(T).Name} РёР· PlayerPrefs");
                 return returnedData;
             }
 
             if (!PlayerPrefs.HasKey(id))
             {
-                Debug.LogError($"Невозможно прочитать данные типа {typeof(T).Name} из PlayerPrefs");
+                Debug.LogError($"РќРµРІРѕР·РјРѕР¶РЅРѕ РїСЂРѕС‡РёС‚Р°С‚СЊ РґР°РЅРЅС‹Рµ С‚РёРїР° {typeof(T).Name} РёР· PlayerPrefs");
                 return returnedData;
             }
 
@@ -60,7 +60,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
             }
             catch (Exception e)
             {
-                Debug.LogError($"Ошибка при преобразовании данных типа {typeof(T).Name}: {e.Message}");
+                Debug.LogError($"РћС€РёР±РєР° РїСЂРё РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРё РґР°РЅРЅС‹С… С‚РёРїР° {typeof(T).Name}: {e.Message}");
             }
 
             return returnedData;
@@ -70,7 +70,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
         {
             if (!IsValidType(typeof(T)))
             {
-                Debug.LogError($"Невозможно сохранить данные типа {typeof(T).Name} в PlayerPrefs");
+                Debug.LogError($"РќРµРІРѕР·РјРѕР¶РЅРѕ СЃРѕС…СЂР°РЅРёС‚СЊ РґР°РЅРЅС‹Рµ С‚РёРїР° {typeof(T).Name} РІ PlayerPrefs");
                 return;
             }    
             

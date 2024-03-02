@@ -8,27 +8,27 @@ namespace Devolvist.UnityReusableSolutions.Events
     public class ScriptableEvent : ScriptableObject
     {
         [Space]
-        [Header("Вывод сообщений в консоль.")]
+        [Header("Р’С‹РІРѕРґ СЃРѕРѕР±С‰РµРЅРёР№ РІ РєРѕРЅСЃРѕР»СЊ.")]
 
-        [Tooltip("Выводить уведомление об очистке данных о подписчиках.")]
+        [Tooltip("Р’С‹РІРѕРґРёС‚СЊ СѓРІРµРґРѕРјР»РµРЅРёРµ РѕР± РѕС‡РёСЃС‚РєРµ РґР°РЅРЅС‹С… Рѕ РїРѕРґРїРёСЃС‡РёРєР°С….")]
         [SerializeField] private bool _logDataClearing;
 
-        [Tooltip("Выводить уведомления о подписке.")]
+        [Tooltip("Р’С‹РІРѕРґРёС‚СЊ СѓРІРµРґРѕРјР»РµРЅРёСЏ Рѕ РїРѕРґРїРёСЃРєРµ.")]
         [SerializeField] private bool _logSubscription;
 
-        [Tooltip("Выводить уведомления об отписке.")]
+        [Tooltip("Р’С‹РІРѕРґРёС‚СЊ СѓРІРµРґРѕРјР»РµРЅРёСЏ РѕР± РѕС‚РїРёСЃРєРµ.")]
         [SerializeField] private bool _logUnsubscription;
 
-        [Tooltip("Выводить предупреждение о повторной подписке.")]
+        [Tooltip("Р’С‹РІРѕРґРёС‚СЊ РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёРµ Рѕ РїРѕРІС‚РѕСЂРЅРѕР№ РїРѕРґРїРёСЃРєРµ.")]
         [SerializeField] private bool _logReSubscription;
 
-        [Tooltip("Выводить предупреждение о публикации без подписчиков.")]
+        [Tooltip("Р’С‹РІРѕРґРёС‚СЊ РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёРµ Рѕ РїСѓР±Р»РёРєР°С†РёРё Р±РµР· РїРѕРґРїРёСЃС‡РёРєРѕРІ.")]
         [SerializeField] private bool _logPublishingWithoutSubscribers;
 
-        [Tooltip("Выводить ошибку обращения к несуществующему списку подписчиков.")]
+        [Tooltip("Р’С‹РІРѕРґРёС‚СЊ РѕС€РёР±РєСѓ РѕР±СЂР°С‰РµРЅРёСЏ Рє РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРјСѓ СЃРїРёСЃРєСѓ РїРѕРґРїРёСЃС‡РёРєРѕРІ.")]
         [SerializeField] private bool _logAccessingNonExistentSubscribersListError;
 
-        [Tooltip("Выводить ошибку удаления несуществующего подписчика.")]
+        [Tooltip("Р’С‹РІРѕРґРёС‚СЊ РѕС€РёР±РєСѓ СѓРґР°Р»РµРЅРёСЏ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РїРѕРґРїРёСЃС‡РёРєР°.")]
         [SerializeField] private bool _logNonExistentSubscriberDeleting;
 
         private List<Action> _subscribers;
@@ -61,7 +61,7 @@ namespace Devolvist.UnityReusableSolutions.Events
             if (_subscribers.Contains(newSubscriber))
             {
                 if (_logReSubscription)
-                    Debug.LogWarning($"Попытка повторного добавления {newSubscriber.Method.Name} в список подписчиков события {name}. Отмена операции.");
+                    Debug.LogWarning($"РџРѕРїС‹С‚РєР° РїРѕРІС‚РѕСЂРЅРѕРіРѕ РґРѕР±Р°РІР»РµРЅРёСЏ {newSubscriber.Method.Name} РІ СЃРїРёСЃРѕРє РїРѕРґРїРёСЃС‡РёРєРѕРІ СЃРѕР±С‹С‚РёСЏ {name}. РћС‚РјРµРЅР° РѕРїРµСЂР°С†РёРё.");
 
                 return;
             }
@@ -69,7 +69,7 @@ namespace Devolvist.UnityReusableSolutions.Events
             _subscribers.Add(newSubscriber);
 
             if (_logSubscription)
-                Debug.Log($"{newSubscriber.Method.Name} подписался на событие {name}.");
+                Debug.Log($"{newSubscriber.Method.Name} РїРѕРґРїРёСЃР°Р»СЃСЏ РЅР° СЃРѕР±С‹С‚РёРµ {name}.");
         }
 
         public void Unsubscribe(Action subscriber)
@@ -85,7 +85,7 @@ namespace Devolvist.UnityReusableSolutions.Events
             if (!_subscribers.Contains(subscriber))
             {
                 if (_logNonExistentSubscriberDeleting)
-                    Debug.LogError($"Попытка удалить несуществующего подписчика {subscriber.Method.Name} из списка подписчиков события {name}.");
+                    Debug.LogError($"РџРѕРїС‹С‚РєР° СѓРґР°Р»РёС‚СЊ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РїРѕРґРїРёСЃС‡РёРєР° {subscriber.Method.Name} РёР· СЃРїРёСЃРєР° РїРѕРґРїРёСЃС‡РёРєРѕРІ СЃРѕР±С‹С‚РёСЏ {name}.");
 
                 return;
             }
@@ -93,12 +93,12 @@ namespace Devolvist.UnityReusableSolutions.Events
             _subscribers.Remove(subscriber);
 
             if (_logUnsubscription)
-                Debug.Log($"{subscriber.Method.Name} отписался от события {name}.");
+                Debug.Log($"{subscriber.Method.Name} РѕС‚РїРёСЃР°Р»СЃСЏ РѕС‚ СЃРѕР±С‹С‚РёСЏ {name}.");
         }
 
         /// <returns>
-        /// True - успешно инициировано.
-        /// False - не инициировано.
+        /// True - СѓСЃРїРµС€РЅРѕ РёРЅРёС†РёРёСЂРѕРІР°РЅРѕ.
+        /// False - РЅРµ РёРЅРёС†РёРёСЂРѕРІР°РЅРѕ.
         /// </returns>
         public void Publish()
         {
@@ -113,7 +113,7 @@ namespace Devolvist.UnityReusableSolutions.Events
             if (_subscribers.Count == 0)
             {
                 if (_logPublishingWithoutSubscribers)
-                    Debug.LogWarning($"Попытка публикации события {name} без подписчиков. Отмена операции.");
+                    Debug.LogWarning($"РџРѕРїС‹С‚РєР° РїСѓР±Р»РёРєР°С†РёРё СЃРѕР±С‹С‚РёСЏ {name} Р±РµР· РїРѕРґРїРёСЃС‡РёРєРѕРІ. РћС‚РјРµРЅР° РѕРїРµСЂР°С†РёРё.");
 
                 return;
             }
@@ -126,15 +126,15 @@ namespace Devolvist.UnityReusableSolutions.Events
         {
             if (_subscribers == null | SubscribersCount == 0)
             {
-                Debug.Log($"{name} не имеет подписчиков.");
+                Debug.Log($"{name} РЅРµ РёРјРµРµС‚ РїРѕРґРїРёСЃС‡РёРєРѕРІ.");
                 return;
             }
 
-            string message = $"Имя события: {name}\nКол-во подписчиков: {SubscribersCount}\n\nПодробная информация о подписчиках:\n\n";
+            string message = $"РРјСЏ СЃРѕР±С‹С‚РёСЏ: {name}\nРљРѕР»-РІРѕ РїРѕРґРїРёСЃС‡РёРєРѕРІ: {SubscribersCount}\n\nРџРѕРґСЂРѕР±РЅР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ Рѕ РїРѕРґРїРёСЃС‡РёРєР°С…:\n\n";
 
             for (int i = 0; i < _subscribers.Count; i++)
             {
-                message += $"Имя метода: {_subscribers[i].Method.Name}\nПринадлежит: {_subscribers[i].Method.DeclaringType} \n\n";
+                message += $"РРјСЏ РјРµС‚РѕРґР°: {_subscribers[i].Method.Name}\nРџСЂРёРЅР°РґР»РµР¶РёС‚: {_subscribers[i].Method.DeclaringType} \n\n";
             }
 
             Debug.Log(message);
@@ -145,12 +145,12 @@ namespace Devolvist.UnityReusableSolutions.Events
             _subscribers?.Clear();
 
             if (_logDataClearing)
-                Debug.Log($"Данные о подписчиках события {name} очищены.");
+                Debug.Log($"Р”Р°РЅРЅС‹Рµ Рѕ РїРѕРґРїРёСЃС‡РёРєР°С… СЃРѕР±С‹С‚РёСЏ {name} РѕС‡РёС‰РµРЅС‹.");
         }
 
         private void LogAccessingNonExistentSubscribersListError()
         {
-            Debug.LogError("Обращение к несуществующему списку подписчиков.");
+            Debug.LogError("РћР±СЂР°С‰РµРЅРёРµ Рє РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРјСѓ СЃРїРёСЃРєСѓ РїРѕРґРїРёСЃС‡РёРєРѕРІ.");
         }
     }
 }

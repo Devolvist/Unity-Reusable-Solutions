@@ -34,7 +34,7 @@ namespace Devolvist.UnityReusableSolutions.EventsExample
 
         private void DisplayJumpText()
         {
-            _jumpText.text = $"Чтобы выполнить прыжок, нажмите кнопку на экране либо клавишу {_jumpKey}";
+            _jumpText.text = $"Р§С‚РѕР±С‹ РІС‹РїРѕР»РЅРёС‚СЊ РїСЂС‹Р¶РѕРє, РЅР°Р¶РјРёС‚Рµ РєРЅРѕРїРєСѓ РЅР° СЌРєСЂР°РЅРµ Р»РёР±Рѕ РєР»Р°РІРёС€Сѓ {_jumpKey}";
         }
 
         private void RequestJump()

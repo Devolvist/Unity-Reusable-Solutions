@@ -6,14 +6,14 @@ using UnityCamera = UnityEngine.Camera;
 namespace Devolvist.UnityReusableSolutions.Camera
 {
     /// <summary>
-    /// Эффект тряски камеры.
+    /// Р­С„С„РµРєС‚ С‚СЂСЏСЃРєРё РєР°РјРµСЂС‹.
     /// </summary>
     public class CameraShakingEffect : MonoBehaviour
     {
-        [Tooltip("Внешний триггер для запуска воспроизведения.")]
+        [Tooltip("Р’РЅРµС€РЅРёР№ С‚СЂРёРіРіРµСЂ РґР»СЏ Р·Р°РїСѓСЃРєР° РІРѕСЃРїСЂРѕРёР·РІРµРґРµРЅРёСЏ.")]
         [SerializeField] private ScriptableEvent _playingTrigger;
 
-        [Header("Конфигурация")]
+        [Header("РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ")]
         [SerializeField, Range(1, 10)] private float _force = 5;
         [SerializeField, Range(0.1f, 1.0f)] private float _durationInSeconds = 0.2f;
 

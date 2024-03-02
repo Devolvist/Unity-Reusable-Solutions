@@ -11,17 +11,17 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
         private static string _globalReleaseSavesFolderName = string.Empty;
         private static DataReadWriteType _globalDataReadWriteType = DataReadWriteType.Binary;
 
-        [Tooltip("Название папки с локальными сохранениями для теста при разработке.")]
+        [Tooltip("РќР°Р·РІР°РЅРёРµ РїР°РїРєРё СЃ Р»РѕРєР°Р»СЊРЅС‹РјРё СЃРѕС…СЂР°РЅРµРЅРёСЏРјРё РґР»СЏ С‚РµСЃС‚Р° РїСЂРё СЂР°Р·СЂР°Р±РѕС‚РєРµ.")]
         [SerializeField, Delayed] private string _developmentSavesFolderName = $"{DEFAULT_SAVES_FOLDER_NAME}_Test";
 
-        [Tooltip("Название папки с локальными сохранениями в релизной версии.")]
+        [Tooltip("РќР°Р·РІР°РЅРёРµ РїР°РїРєРё СЃ Р»РѕРєР°Р»СЊРЅС‹РјРё СЃРѕС…СЂР°РЅРµРЅРёСЏРјРё РІ СЂРµР»РёР·РЅРѕР№ РІРµСЂСЃРёРё.")]
         [SerializeField, Delayed] private string _releaseSavesFolderName = DEFAULT_SAVES_FOLDER_NAME;
 
-        [Tooltip("Тип локальной обработки сохраняемых данных.")]
+        [Tooltip("РўРёРї Р»РѕРєР°Р»СЊРЅРѕР№ РѕР±СЂР°Р±РѕС‚РєРё СЃРѕС…СЂР°РЅСЏРµРјС‹С… РґР°РЅРЅС‹С….")]
         [SerializeField] private DataReadWriteType _dataReadWriteType = DataReadWriteType.Binary;
 
         /// <summary>
-        /// Название папки с локальными сохранениями.
+        /// РќР°Р·РІР°РЅРёРµ РїР°РїРєРё СЃ Р»РѕРєР°Р»СЊРЅС‹РјРё СЃРѕС…СЂР°РЅРµРЅРёСЏРјРё.
         /// </summary>
         public static string SavableDataFolderName
         {
@@ -31,7 +31,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
                 return _globalDevelopmentSavesFolderName != string.Empty ?
                     _globalDevelopmentSavesFolderName : $"{DEFAULT_SAVES_FOLDER_NAME}_Test";
 #endif
-#pragma warning disable CS0162 // Обнаружен недостижимый код
+#pragma warning disable CS0162 // РћР±РЅР°СЂСѓР¶РµРЅ РЅРµРґРѕСЃС‚РёР¶РёРјС‹Р№ РєРѕРґ
                 return _globalReleaseSavesFolderName != string.Empty ?
                     _globalReleaseSavesFolderName : DEFAULT_SAVES_FOLDER_NAME;
             }

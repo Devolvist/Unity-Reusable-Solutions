@@ -6,7 +6,7 @@ namespace Devolvist.UnityReusableSolutions.EventsExample
     [RequireComponent(typeof(Rigidbody))]
     public class Character : MonoBehaviour
     {
-        [Tooltip("Внешний запрос на выполнение прыжка.")]
+        [Tooltip("Р’РЅРµС€РЅРёР№ Р·Р°РїСЂРѕСЃ РЅР° РІС‹РїРѕР»РЅРµРЅРёРµ РїСЂС‹Р¶РєР°.")]
         [SerializeField] private ScriptableEvent _jumpRequest;
 
         private Rigidbody _rigidbody;
@@ -28,7 +28,7 @@ namespace Devolvist.UnityReusableSolutions.EventsExample
 
         private void Jump()
         {
-            Debug.Log("Выполняется прыжок.");
+            Debug.Log("Р’С‹РїРѕР»РЅСЏРµС‚СЃСЏ РїСЂС‹Р¶РѕРє.");
 
             float force = 5;
 

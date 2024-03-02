@@ -11,7 +11,7 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
     public class SaveLoadTests
     {
         [UnityTest]
-        [Description("Возврат false при запросе на проверку наличия сохранений при реальном отсутствии сохранений типа Binary.")]
+        [Description("Р’РѕР·РІСЂР°С‚ false РїСЂРё Р·Р°РїСЂРѕСЃРµ РЅР° РїСЂРѕРІРµСЂРєСѓ РЅР°Р»РёС‡РёСЏ СЃРѕС…СЂР°РЅРµРЅРёР№ РїСЂРё СЂРµР°Р»СЊРЅРѕРј РѕС‚СЃСѓС‚СЃС‚РІРёРё СЃРѕС…СЂР°РЅРµРЅРёР№ С‚РёРїР° Binary.")]
         public IEnumerator CheckIsFalseWhenUnavailableBinarySaves()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
@@ -32,7 +32,7 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
         }     
 
         [UnityTest]
-        [Description("Возврат false при запросе на проверку наличия сохранений при реальном отсутствии сохранений типа PlayerPrefs.")]
+        [Description("Р’РѕР·РІСЂР°С‚ false РїСЂРё Р·Р°РїСЂРѕСЃРµ РЅР° РїСЂРѕРІРµСЂРєСѓ РЅР°Р»РёС‡РёСЏ СЃРѕС…СЂР°РЅРµРЅРёР№ РїСЂРё СЂРµР°Р»СЊРЅРѕРј РѕС‚СЃСѓС‚СЃС‚РІРёРё СЃРѕС…СЂР°РЅРµРЅРёР№ С‚РёРїР° PlayerPrefs.")]
         public IEnumerator CheckIsFalseWhenUnavailablePlayerPrefsSaves()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
@@ -53,7 +53,7 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
         }
 
         [UnityTest]
-        [Description("Возврат true при запросе на проверку наличия сохранений при реальном наличии сохранений типа Binary.")]
+        [Description("Р’РѕР·РІСЂР°С‚ true РїСЂРё Р·Р°РїСЂРѕСЃРµ РЅР° РїСЂРѕРІРµСЂРєСѓ РЅР°Р»РёС‡РёСЏ СЃРѕС…СЂР°РЅРµРЅРёР№ РїСЂРё СЂРµР°Р»СЊРЅРѕРј РЅР°Р»РёС‡РёРё СЃРѕС…СЂР°РЅРµРЅРёР№ С‚РёРїР° Binary.")]
         public IEnumerator CheckSavesIsTrueWhenAvailableBinarySaves()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
@@ -76,7 +76,7 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
         }
 
         [UnityTest]
-        [Description("Возврат true при запросе на проверку наличия сохранений при реальном наличии сохранений типа PlayerPrefs.")]
+        [Description("Р’РѕР·РІСЂР°С‚ true РїСЂРё Р·Р°РїСЂРѕСЃРµ РЅР° РїСЂРѕРІРµСЂРєСѓ РЅР°Р»РёС‡РёСЏ СЃРѕС…СЂР°РЅРµРЅРёР№ РїСЂРё СЂРµР°Р»СЊРЅРѕРј РЅР°Р»РёС‡РёРё СЃРѕС…СЂР°РЅРµРЅРёР№ С‚РёРїР° PlayerPrefs.")]
         public IEnumerator CheckSavesIsTrueWhenAvailablePlayerPrefsSaves()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
@@ -99,7 +99,7 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
         }
 
         [UnityTest]
-        [Description("Успешная загрузка ранее сохранённой строки через Binary.")]
+        [Description("РЈСЃРїРµС€РЅР°СЏ Р·Р°РіСЂСѓР·РєР° СЂР°РЅРµРµ СЃРѕС…СЂР°РЅС‘РЅРЅРѕР№ СЃС‚СЂРѕРєРё С‡РµСЂРµР· Binary.")]
         public IEnumerator SuccessfullyLoadingAferSavingStringInBinary()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
@@ -123,7 +123,7 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
         }
 
         [UnityTest]
-        [Description("Успешная загрузка ранее сохранённой строки через PlayerPrefs.")]
+        [Description("РЈСЃРїРµС€РЅР°СЏ Р·Р°РіСЂСѓР·РєР° СЂР°РЅРµРµ СЃРѕС…СЂР°РЅС‘РЅРЅРѕР№ СЃС‚СЂРѕРєРё С‡РµСЂРµР· PlayerPrefs.")]
         public IEnumerator SuccessfullyLoadingAfterSavingStringInPlayerPrefs()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
@@ -147,7 +147,7 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
         }
 
         [UnityTest]
-        [Description("Успешная загрузка ранее сохранённого целого числа через Binary.")]
+        [Description("РЈСЃРїРµС€РЅР°СЏ Р·Р°РіСЂСѓР·РєР° СЂР°РЅРµРµ СЃРѕС…СЂР°РЅС‘РЅРЅРѕРіРѕ С†РµР»РѕРіРѕ С‡РёСЃР»Р° С‡РµСЂРµР· Binary.")]
         public IEnumerator SuccessfullyLoadingAferSavingIntInBinary()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
@@ -171,7 +171,7 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
         }
 
         [UnityTest]
-        [Description("Успешная загрузка ранее сохранённого целого числа через PlayerPrefs.")]
+        [Description("РЈСЃРїРµС€РЅР°СЏ Р·Р°РіСЂСѓР·РєР° СЂР°РЅРµРµ СЃРѕС…СЂР°РЅС‘РЅРЅРѕРіРѕ С†РµР»РѕРіРѕ С‡РёСЃР»Р° С‡РµСЂРµР· PlayerPrefs.")]
         public IEnumerator SuccessfullyLoadingAferSavingIntInPlayerPrefs()
         {
             DataReadWriteType lastReadWriteType = LocalSaveLoadConfig.DataReadWriteType;
@@ -196,7 +196,7 @@ namespace Devolvist.UnityReusableSolutions.PlayModeTests
 
         #region Mocks
         /// <summary>
-        /// Имитация объекта с сохраняемыми данными.
+        /// РРјРёС‚Р°С†РёСЏ РѕР±СЉРµРєС‚Р° СЃ СЃРѕС…СЂР°РЅСЏРµРјС‹РјРё РґР°РЅРЅС‹РјРё.
         /// </summary>
         private class MockSavableClientWithStringProperty : ISavable
         {

@@ -7,7 +7,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
     public class StateMachineTests
     {
         [Test]
-        [Description("Активное состояние является null при создании объекта без аргумента конструктора.")]
+        [Description("РђРєС‚РёРІРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ СЏРІР»СЏРµС‚СЃСЏ null РїСЂРё СЃРѕР·РґР°РЅРёРё РѕР±СЉРµРєС‚Р° Р±РµР· Р°СЂРіСѓРјРµРЅС‚Р° РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°.")]
         public void ActiveStateIsNullWhenCreatedWithoutArgument()
         {
             StateMachine stateMachine = new StateMachine();
@@ -16,7 +16,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("Активное состояние является переданным аргументом при создании объекта c аргументом конструктора.")]
+        [Description("РђРєС‚РёРІРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ СЏРІР»СЏРµС‚СЃСЏ РїРµСЂРµРґР°РЅРЅС‹Рј Р°СЂРіСѓРјРµРЅС‚РѕРј РїСЂРё СЃРѕР·РґР°РЅРёРё РѕР±СЉРµРєС‚Р° c Р°СЂРіСѓРјРµРЅС‚РѕРј РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°.")]
         public void ActiveStateIsArgumentedStateWhenCreatedWithArgument()
         {
             IState mockState = new MockState();
@@ -26,7 +26,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("Активное состояние остается прежним при запросе на изменение состояния с аргументом того же состояния.")]
+        [Description("РђРєС‚РёРІРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РѕСЃС‚Р°РµС‚СЃСЏ РїСЂРµР¶РЅРёРј РїСЂРё Р·Р°РїСЂРѕСЃРµ РЅР° РёР·РјРµРЅРµРЅРёРµ СЃРѕСЃС‚РѕСЏРЅРёСЏ СЃ Р°СЂРіСѓРјРµРЅС‚РѕРј С‚РѕРіРѕ Р¶Рµ СЃРѕСЃС‚РѕСЏРЅРёСЏ.")]
         public void ActiveStateIsNotChangedWhenChangingActiveStateWithIdenticalStateInArgument()
         {
             IState mockState = new MockState();
@@ -38,7 +38,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("Активное состояние меняется на новое при запросе на изменение состояния с аргументом нового состояния.")]
+        [Description("РђРєС‚РёРІРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РјРµРЅСЏРµС‚СЃСЏ РЅР° РЅРѕРІРѕРµ РїСЂРё Р·Р°РїСЂРѕСЃРµ РЅР° РёР·РјРµРЅРµРЅРёРµ СЃРѕСЃС‚РѕСЏРЅРёСЏ СЃ Р°СЂРіСѓРјРµРЅС‚РѕРј РЅРѕРІРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ.")]
         public void ActiveStateChangedWhenChangingActiveStateWithNewStateInArgument()
         {
             IState mockState = new MockState();
@@ -51,7 +51,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("Активное состояние остается прежним при запросе на изменение состояния с передачей null в качестве аргумента.")]
+        [Description("РђРєС‚РёРІРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РѕСЃС‚Р°РµС‚СЃСЏ РїСЂРµР¶РЅРёРј РїСЂРё Р·Р°РїСЂРѕСЃРµ РЅР° РёР·РјРµРЅРµРЅРёРµ СЃРѕСЃС‚РѕСЏРЅРёСЏ СЃ РїРµСЂРµРґР°С‡РµР№ null РІ РєР°С‡РµСЃС‚РІРµ Р°СЂРіСѓРјРµРЅС‚Р°.")]
         public void ActiveStateIsNotChangedWhenChangingActiveStateWithNullArgument()
         {
             IState mockState = new MockState();
@@ -63,7 +63,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("Вызов Exit() у активного состояния при изменении состояния на новое. ")]
+        [Description("Р’С‹Р·РѕРІ Exit() Сѓ Р°РєС‚РёРІРЅРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїСЂРё РёР·РјРµРЅРµРЅРёРё СЃРѕСЃС‚РѕСЏРЅРёСЏ РЅР° РЅРѕРІРѕРµ. ")]
         public void CalledExitAtActiveStateWhenChangingActiveState()
         {
             IState mockState = new MockState();
@@ -76,7 +76,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("Вызов Enter() у нового состояния при изменении состояния на новое. ")]
+        [Description("Р’С‹Р·РѕРІ Enter() Сѓ РЅРѕРІРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїСЂРё РёР·РјРµРЅРµРЅРёРё СЃРѕСЃС‚РѕСЏРЅРёСЏ РЅР° РЅРѕРІРѕРµ. ")]
         public void CalledEnterAtNewStateWhenChangingActiveState()
         {
             IState mockState = new MockState();
@@ -89,7 +89,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("Вызов Exit() у предыдущего состояния и вызов Enter() у нового при изменении состояния на новое. ")]
+        [Description("Р’С‹Р·РѕРІ Exit() Сѓ РїСЂРµРґС‹РґСѓС‰РµРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ Рё РІС‹Р·РѕРІ Enter() Сѓ РЅРѕРІРѕРіРѕ РїСЂРё РёР·РјРµРЅРµРЅРёРё СЃРѕСЃС‚РѕСЏРЅРёСЏ РЅР° РЅРѕРІРѕРµ. ")]
         public void CalledExitAtLastStateThenCalledEnterAtNewStateWhenChangingActiveState()
         {
             MockState mockState = new MockState();
@@ -104,7 +104,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
 
         #region Mocks
         /// <summary>
-        /// Имитация состояния.
+        /// РРјРёС‚Р°С†РёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ.
         /// </summary>
         private class MockState : IState
         {

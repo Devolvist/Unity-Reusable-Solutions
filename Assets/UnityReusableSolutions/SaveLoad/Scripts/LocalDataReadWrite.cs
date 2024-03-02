@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Devolvist.UnityReusableSolutions.SaveLoad
 {
     /// <summary>
-    /// Чтение-запись данных на устройстве пользователя.
+    /// Р§С‚РµРЅРёРµ-Р·Р°РїРёСЃСЊ РґР°РЅРЅС‹С… РЅР° СѓСЃС‚СЂРѕР№СЃС‚РІРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ.
     /// </summary>
     public abstract class LocalDataReadWrite : ReadWriteData
     {
@@ -17,7 +17,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
         }
 
         /// <summary>
-        /// Путь к папке c файлами данных.
+        /// РџСѓС‚СЊ Рє РїР°РїРєРµ c С„Р°Р№Р»Р°РјРё РґР°РЅРЅС‹С….
         /// </summary>
         protected readonly string DataFolderDirectoryPath;
 
@@ -25,11 +25,11 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
         public override bool HasWrittenData()
         {
-            // Проверить наличие папки с записанными данными.
+            // РџСЂРѕРІРµСЂРёС‚СЊ РЅР°Р»РёС‡РёРµ РїР°РїРєРё СЃ Р·Р°РїРёСЃР°РЅРЅС‹РјРё РґР°РЅРЅС‹РјРё.
             if (!Directory.Exists(DataFolderDirectoryPath))
                 return false;
 
-            // Проверить наличие файлов в папке.
+            // РџСЂРѕРІРµСЂРёС‚СЊ РЅР°Р»РёС‡РёРµ С„Р°Р№Р»РѕРІ РІ РїР°РїРєРµ.
             if (Directory.GetFiles(DataFolderDirectoryPath).Length == 0)
                 return false;
             else
@@ -47,7 +47,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
             }
             else
             {
-                Debug.LogError($"Попытка удалить несуществующий файл.\nЗапрошенный путь - {filePath}.");
+                Debug.LogError($"РџРѕРїС‹С‚РєР° СѓРґР°Р»РёС‚СЊ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ С„Р°Р№Р».\nР—Р°РїСЂРѕС€РµРЅРЅС‹Р№ РїСѓС‚СЊ - {filePath}.");
                 return false;
             }
         }

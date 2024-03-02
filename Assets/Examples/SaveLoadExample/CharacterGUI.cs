@@ -68,7 +68,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoadExample
 
         private void DisplayCurrentHealth()
         {
-            _healthText.text = $"Текущее здоровье: {_character.Health}";
+            _healthText.text = $"РўРµРєСѓС‰РµРµ Р·РґРѕСЂРѕРІСЊРµ: {_character.Health}";
         }
 
         private void UpdateButtonsInteractivity()

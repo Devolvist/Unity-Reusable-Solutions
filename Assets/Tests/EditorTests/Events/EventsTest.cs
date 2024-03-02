@@ -8,7 +8,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
     public class EventsTest
     {      
         [Test]
-        [Description("0 подписчиков при создании экз. события.")]
+        [Description("0 РїРѕРґРїРёСЃС‡РёРєРѕРІ РїСЂРё СЃРѕР·РґР°РЅРёРё СЌРєР·. СЃРѕР±С‹С‚РёСЏ.")]
         public void Is0SubscribersWhenInstanceCreated()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
@@ -17,7 +17,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("1 подписчик при единоразовой подписке одного метода.")]
+        [Description("1 РїРѕРґРїРёСЃС‡РёРє РїСЂРё РµРґРёРЅРѕСЂР°Р·РѕРІРѕР№ РїРѕРґРїРёСЃРєРµ РѕРґРЅРѕРіРѕ РјРµС‚РѕРґР°.")]
         public void Is1SubscriberWhenSubscribeSingle()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
@@ -28,7 +28,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("1 подписчик после повторной подписки того же метода.")]
+        [Description("1 РїРѕРґРїРёСЃС‡РёРє РїРѕСЃР»Рµ РїРѕРІС‚РѕСЂРЅРѕР№ РїРѕРґРїРёСЃРєРё С‚РѕРіРѕ Р¶Рµ РјРµС‚РѕРґР°.")]
         public void Is1SubscriberWhenSubscribeTwice()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
@@ -40,7 +40,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("0 подписчиков, когда один метод подписался и отписался.")]
+        [Description("0 РїРѕРґРїРёСЃС‡РёРєРѕРІ, РєРѕРіРґР° РѕРґРёРЅ РјРµС‚РѕРґ РїРѕРґРїРёСЃР°Р»СЃСЏ Рё РѕС‚РїРёСЃР°Р»СЃСЏ.")]
         public void Is0SubscribersWhenSubscribeThenUnsubscribe()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
@@ -52,7 +52,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("2 подписчика, когда два разных метода подписались.")]
+        [Description("2 РїРѕРґРїРёСЃС‡РёРєР°, РєРѕРіРґР° РґРІР° СЂР°Р·РЅС‹С… РјРµС‚РѕРґР° РїРѕРґРїРёСЃР°Р»РёСЃСЊ.")]
         public void Is2SubscribersWhen2DifferentActionsSubscribes()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
@@ -64,7 +64,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("1 подписчик, когда два разных метода подписались, затем один из них отписался.")]
+        [Description("1 РїРѕРґРїРёСЃС‡РёРє, РєРѕРіРґР° РґРІР° СЂР°Р·РЅС‹С… РјРµС‚РѕРґР° РїРѕРґРїРёСЃР°Р»РёСЃСЊ, Р·Р°С‚РµРј РѕРґРёРЅ РёР· РЅРёС… РѕС‚РїРёСЃР°Р»СЃСЏ.")]
         public void Is1SubscriberWhen2DifferentActionsSubscribesThen1Unsubscribe()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
@@ -77,7 +77,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("2 подписчика, когда два разных клиента подписались.")]
+        [Description("2 РїРѕРґРїРёСЃС‡РёРєР°, РєРѕРіРґР° РґРІР° СЂР°Р·РЅС‹С… РєР»РёРµРЅС‚Р° РїРѕРґРїРёСЃР°Р»РёСЃСЊ.")]
         public void Is2SubscribersWhen2DifferentClientsSubscribed()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
@@ -91,7 +91,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("1 подписчик, когда два разных клиента подписались, затем один из них отписался.")]
+        [Description("1 РїРѕРґРїРёСЃС‡РёРє, РєРѕРіРґР° РґРІР° СЂР°Р·РЅС‹С… РєР»РёРµРЅС‚Р° РїРѕРґРїРёСЃР°Р»РёСЃСЊ, Р·Р°С‚РµРј РѕРґРёРЅ РёР· РЅРёС… РѕС‚РїРёСЃР°Р»СЃСЏ.")]
         public void Is1SubscriberWhen2DifferentClientsSubscribeThen1Unsubscribed()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
@@ -106,7 +106,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("0 подписчиков, когда один метод подписался, затем отписался дважды.")]
+        [Description("0 РїРѕРґРїРёСЃС‡РёРєРѕРІ, РєРѕРіРґР° РѕРґРёРЅ РјРµС‚РѕРґ РїРѕРґРїРёСЃР°Р»СЃСЏ, Р·Р°С‚РµРј РѕС‚РїРёСЃР°Р»СЃСЏ РґРІР°Р¶РґС‹.")]
         public void Is0SubscribersWhen1SubscribedThenUnsubscribedTwice()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
@@ -119,7 +119,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("2 подписчика, когда два разных клиента подписались дважды.")]
+        [Description("2 РїРѕРґРїРёСЃС‡РёРєР°, РєРѕРіРґР° РґРІР° СЂР°Р·РЅС‹С… РєР»РёРµРЅС‚Р° РїРѕРґРїРёСЃР°Р»РёСЃСЊ РґРІР°Р¶РґС‹.")]
         public void Is2SubscribersWhen2DifferentClientsSubscribedTwice()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
@@ -135,7 +135,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("0 подписчиков, когда данные о подписчиках очистились при наличии одного активного подписчика.")]
+        [Description("0 РїРѕРґРїРёСЃС‡РёРєРѕРІ, РєРѕРіРґР° РґР°РЅРЅС‹Рµ Рѕ РїРѕРґРїРёСЃС‡РёРєР°С… РѕС‡РёСЃС‚РёР»РёСЃСЊ РїСЂРё РЅР°Р»РёС‡РёРё РѕРґРЅРѕРіРѕ Р°РєС‚РёРІРЅРѕРіРѕ РїРѕРґРїРёСЃС‡РёРєР°.")]
         public void Is0SubscribersWhenDataClearedWithActiveSubscriber()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();
@@ -147,7 +147,7 @@ namespace Devolvist.UnityReusableSolutions.EditorTests
         }
 
         [Test]
-        [Description("Все подписчики уведомлены, когда один из подписчиков отписался в процессе перебора коллекции подпичиков.")]
+        [Description("Р’СЃРµ РїРѕРґРїРёСЃС‡РёРєРё СѓРІРµРґРѕРјР»РµРЅС‹, РєРѕРіРґР° РѕРґРёРЅ РёР· РїРѕРґРїРёСЃС‡РёРєРѕРІ РѕС‚РїРёСЃР°Р»СЃСЏ РІ РїСЂРѕС†РµСЃСЃРµ РїРµСЂРµР±РѕСЂР° РєРѕР»Р»РµРєС†РёРё РїРѕРґРїРёС‡РёРєРѕРІ.")]
         public void IsAllSubscribersInvokedWhen1SubscriberUnsubscribedAtProcess()
         {
             ScriptableEvent testableEvent = ScriptableObject.CreateInstance<ScriptableEvent>();

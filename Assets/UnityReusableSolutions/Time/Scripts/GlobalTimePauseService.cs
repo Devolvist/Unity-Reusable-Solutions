@@ -3,7 +3,7 @@ using UnityTime = UnityEngine.Time;
 namespace Devolvist.UnityReusableSolutions.Time
 {
     /// <summary>
-    /// Оболочка для взаимодействия с UnityEngine.Time.timeScale
+    /// РћР±РѕР»РѕС‡РєР° РґР»СЏ РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёСЏ СЃ UnityEngine.Time.timeScale
     /// </summary>
     public static class GlobalTimePauseService
     {

@@ -7,8 +7,8 @@ using UnityEngine;
 
 namespace Devolvist.UnityReusableSolutions.SaveLoad
 {
-    // Высокоуровневый сервис, предоставляющий единый интерфейс для работы с сохранениями.
-    // Инкапсулирует логику работы с локальными сохранениями.
+    // Р’С‹СЃРѕРєРѕСѓСЂРѕРІРЅРµРІС‹Р№ СЃРµСЂРІРёСЃ, РїСЂРµРґРѕСЃС‚Р°РІР»СЏСЋС‰РёР№ РµРґРёРЅС‹Р№ РёРЅС‚РµСЂС„РµР№СЃ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ СЃРѕС…СЂР°РЅРµРЅРёСЏРјРё.
+    // РРЅРєР°РїСЃСѓР»РёСЂСѓРµС‚ Р»РѕРіРёРєСѓ СЂР°Р±РѕС‚С‹ СЃ Р»РѕРєР°Р»СЊРЅС‹РјРё СЃРѕС…СЂР°РЅРµРЅРёСЏРјРё.
 
     public class SaveLoadService : MonoSingleton<SaveLoadService>
     {
@@ -34,8 +34,8 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
         }
 
         /// <returns>
-        /// True - данные есть.
-        /// False - данных нет.
+        /// True - РґР°РЅРЅС‹Рµ РµСЃС‚СЊ.
+        /// False - РґР°РЅРЅС‹С… РЅРµС‚.
         /// </returns>
         public bool CheckForSavedData()
         {
@@ -59,8 +59,8 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
         #region STATIC_OPERATIONS_WITH_REGISTERED_CLIENTS
         /// <summary>
-        /// Регистрация сохраняемого объекта для автоматического вызова методов его интерфейса.
-        /// Повторная регистрация не засчитывается.
+        /// Р РµРіРёСЃС‚СЂР°С†РёСЏ СЃРѕС…СЂР°РЅСЏРµРјРѕРіРѕ РѕР±СЉРµРєС‚Р° РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ РІС‹Р·РѕРІР° РјРµС‚РѕРґРѕРІ РµРіРѕ РёРЅС‚РµСЂС„РµР№СЃР°.
+        /// РџРѕРІС‚РѕСЂРЅР°СЏ СЂРµРіРёСЃС‚СЂР°С†РёСЏ РЅРµ Р·Р°СЃС‡РёС‚С‹РІР°РµС‚СЃСЏ.
         /// </summary>
         public static void Register(ISavable savable)
         {
@@ -126,7 +126,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
             if (!Directory.Exists(savesFolderPath))
             {
-                UnityEngine.Debug.LogWarning($"Папка с локальными сохранениями отсутствует.\nЗапрошенный путь: {savesFolderPath}");
+                UnityEngine.Debug.LogWarning($"РџР°РїРєР° СЃ Р»РѕРєР°Р»СЊРЅС‹РјРё СЃРѕС…СЂР°РЅРµРЅРёСЏРјРё РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚.\nР—Р°РїСЂРѕС€РµРЅРЅС‹Р№ РїСѓС‚СЊ: {savesFolderPath}");
                 return;
             }
 
@@ -139,7 +139,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
             if (LocalSaveLoadConfig.DataReadWriteType == DataReadWriteType.PlayerPrefs)
             {
                 PlayerPrefs.DeleteAll();
-                UnityEngine.Debug.Log("Данные в PlayerPrefs удалены.");
+                UnityEngine.Debug.Log("Р”Р°РЅРЅС‹Рµ РІ PlayerPrefs СѓРґР°Р»РµРЅС‹.");
             }
 
             ResetRegisteredSavableObjectsToDefault();
@@ -148,7 +148,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
             if (!Directory.Exists(savedFilesFolderPath))
             {
-                UnityEngine.Debug.LogWarning($"Локальных сохранений нет. Папка с локальными сохранениями отсутствует.\nЗапрошенный путь: {savedFilesFolderPath}");
+                UnityEngine.Debug.LogWarning($"Р›РѕРєР°Р»СЊРЅС‹С… СЃРѕС…СЂР°РЅРµРЅРёР№ РЅРµС‚. РџР°РїРєР° СЃ Р»РѕРєР°Р»СЊРЅС‹РјРё СЃРѕС…СЂР°РЅРµРЅРёСЏРјРё РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚.\nР—Р°РїСЂРѕС€РµРЅРЅС‹Р№ РїСѓС‚СЊ: {savedFilesFolderPath}");
                 return;
             }
 
@@ -159,7 +159,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
             Directory.Delete(savedFilesFolderPath);
 
-            UnityEngine.Debug.Log("Локальные сохранения удалены.");
+            UnityEngine.Debug.Log("Р›РѕРєР°Р»СЊРЅС‹Рµ СЃРѕС…СЂР°РЅРµРЅРёСЏ СѓРґР°Р»РµРЅС‹.");
         }
 #endif
         #endregion

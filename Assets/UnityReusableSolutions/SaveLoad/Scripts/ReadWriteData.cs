@@ -1,14 +1,14 @@
 namespace Devolvist.UnityReusableSolutions.SaveLoad
 {
     /// <summary>
-    /// Чтение-запись данных.
+    /// Р§С‚РµРЅРёРµ-Р·Р°РїРёСЃСЊ РґР°РЅРЅС‹С….
     /// </summary>
     public abstract class ReadWriteData
     {
         /// <returns>
-        /// Проверить наличие записанных данных.
-        /// True - данные есть.
-        /// False - данных нет.
+        /// РџСЂРѕРІРµСЂРёС‚СЊ РЅР°Р»РёС‡РёРµ Р·Р°РїРёСЃР°РЅРЅС‹С… РґР°РЅРЅС‹С….
+        /// True - РґР°РЅРЅС‹Рµ РµСЃС‚СЊ.
+        /// False - РґР°РЅРЅС‹С… РЅРµС‚.
         /// </returns>
         public abstract bool HasWrittenData();
 
@@ -17,7 +17,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
         public abstract T ReadData<T>(string id);
 
         /// <returns>
-        /// True - данные успешно удалены. False - данные не найдены.
+        /// True - РґР°РЅРЅС‹Рµ СѓСЃРїРµС€РЅРѕ СѓРґР°Р»РµРЅС‹. False - РґР°РЅРЅС‹Рµ РЅРµ РЅР°Р№РґРµРЅС‹.
         /// </returns>
         public abstract bool DeleteData(string id);
     }
