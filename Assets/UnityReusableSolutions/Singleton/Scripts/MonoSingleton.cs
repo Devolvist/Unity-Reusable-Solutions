@@ -8,6 +8,8 @@ namespace Devolvist.UnityReusableSolutions.Singleton
     /// </summary>
     public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {
+        [SerializeField] private bool _dontDestroyOnLoad = true;
+
         public static T Instance { get; private set; }
 
         private void Awake()
@@ -21,7 +23,8 @@ namespace Devolvist.UnityReusableSolutions.Singleton
 
             Instance = this as T;
 
-            DontDestroyOnLoad(gameObject);
+            if (_dontDestroyOnLoad)
+                DontDestroyOnLoad(gameObject);
 
             InitializeOnAwake();
         }
