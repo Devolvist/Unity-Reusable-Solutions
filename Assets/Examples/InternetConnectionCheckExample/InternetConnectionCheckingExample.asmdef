@@ -1,0 +1,17 @@
+{
+    "name": "InternetConnectionCheckingExample",
+    "rootNamespace": "Devolvist.UnityReusableSolutions.InternetConnectionCheckingExample",
+    "references": [
+        "GUID:7426b460172621947ab06231e7d84ec8",
+        "GUID:1b66c5f4363f8784e84dab8fea91c421"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

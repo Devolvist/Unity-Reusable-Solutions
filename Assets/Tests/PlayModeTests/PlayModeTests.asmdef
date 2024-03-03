@@ -5,7 +5,8 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "SaveLoad",
-        "Singleton"
+        "Singleton",
+        "Internet"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1736,8 +1736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d39a7385994767045aa1d3c03504aa5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localSaveLoadConfig: {fileID: 11400000, guid: 9a0f4be4cc4ebaa49b87bba10a1193b5,
-    type: 2}
+  _dontDestroyOnLoad: 1
 --- !u!1 &1497368518
 GameObject:
   m_ObjectHideFlags: 0
