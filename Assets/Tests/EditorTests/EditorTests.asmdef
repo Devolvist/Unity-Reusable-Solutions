@@ -6,7 +6,8 @@
         "UnityEditor.TestRunner",
         "Math",
         "Events",
-        "StatesManagement"
+        "StatesManagement",
+        "StringUtilities"
     ],
     "includePlatforms": [
         "Editor"
