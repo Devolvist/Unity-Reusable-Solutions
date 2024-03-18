@@ -100,7 +100,7 @@ namespace Devolvist.UnityReusableSolutions.Events
         /// True - успешно инициировано.
         /// False - не инициировано.
         /// </returns>
-        public void Publish()
+        public virtual void Publish()
         {
             if (_subscribers == null)
             {
