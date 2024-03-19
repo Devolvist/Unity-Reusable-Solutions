@@ -1,14 +1,13 @@
 using Devolvist.UnityReusableSolutions.Events;
 using System.Collections;
 using UnityEngine;
-using UnityCamera = UnityEngine.Camera;
 
-namespace Devolvist.UnityReusableSolutions.Camera
+namespace Devolvist.UnityReusableSolutions.Effects
 {
     /// <summary>
-    /// Эффект тряски камеры.
+    /// Эффект тряски.
     /// </summary>
-    public class CameraShakingEffect : MonoBehaviour
+    public class ShakingEffect : MonoBehaviour
     {
         [Tooltip("Внешний триггер для запуска воспроизведения.")]
         [SerializeField] private ScriptableEvent _playingTrigger;
@@ -41,7 +40,7 @@ namespace Devolvist.UnityReusableSolutions.Camera
                 return;
 
             IsPlaying = true;
-            _initialPosition = UnityCamera.main.transform.position;
+            _initialPosition = transform.position;
         
             Invoke(nameof(Stop), _durationInSeconds);
             StartCoroutine(Play());
@@ -53,14 +52,16 @@ namespace Devolvist.UnityReusableSolutions.Camera
 
             while (IsPlaying)
             {
-                UnityCamera.main.transform.position = _initialPosition + (_force * Time.deltaTime * Random.insideUnitSphere);
+                transform.position =
+                    _initialPosition + (_force * Time.deltaTime * Random.insideUnitSphere);
+
                 yield return waitForEndOfFrame;
             }           
         }
 
         private void Stop()
         {         
-            UnityCamera.main.transform.position = _initialPosition;
+            transform.position = _initialPosition;
             IsPlaying = false;
         }
     }

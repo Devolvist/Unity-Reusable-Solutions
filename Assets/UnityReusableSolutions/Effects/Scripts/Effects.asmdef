@@ -1,6 +1,6 @@
 {
-    "name": "Camera",
-    "rootNamespace": "Devolvist.UnityReusableSolutions.Camera",
+    "name": "Effects",
+    "rootNamespace": "Devolvist.UnityReusableSolutions.Effects",
     "references": [
         "GUID:f85c0a1405e884549b9ca782fc8ac2ee"
     ],
