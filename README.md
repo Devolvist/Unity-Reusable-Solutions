@@ -3,8 +3,8 @@
 Библиотека решений для проектов в Unity, которые можно переиспользовать независимо от контекста.
 
 
-
-## Effects
+<details>
+<summary>Effects</summary>
 
 ### Shaking Effect
 
@@ -32,53 +32,62 @@ https://github.com/Devolvist/Unity-Reusable-Solutions/assets/97983639/a2d31efa-4
 
 > Более подробно с примером можно ознакомиться в соответствующей сцене исходного проекта.
  ![image](https://github.com/Devolvist/Unity-Reusable-Solutions/assets/97983639/455bad6d-3309-40af-b48a-7a3926437cec)
+</details>
 
 
-
-## Events
+<details>
+<summary>Events</summary>
 
 ### <a id="scriptable-event"></a> Scriptable Event
 ...
+</details>
 
 
-
-## Internet
+<details>
+<summary>Internet</summary>
 
 ### Internet Connection
 ...
+</details>
 
 
-
-## Math
+<details>
+<summary>Math</summary>
 
 ### Interpolation
 ...
 ### Percentage Calculator
 ...
+</details>
 
 
-
-## Save-Load
+<details>
+<summary>Save-Load</summary>
 ...
+</details>
 
 
-
-## Singleton
+<details>
+<summary>Singleton</summary>
 
 ### Mono Singleton
 ...
+</details>
 
 
-
-## States Management
+<details>
+<summary>States Management</summary>
 ...
+</details>
 
 
-
-## String Utilities
+<details>
+<summary>String Utilities</summary>
 ...
+</details>
 
 
-
-## Time
+<details>
+<summary>Time</summary>
 ...
+</details>
