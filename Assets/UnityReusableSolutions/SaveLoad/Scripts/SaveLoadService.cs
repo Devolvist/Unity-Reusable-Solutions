@@ -119,7 +119,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
 
         #region EDITOR_MENU_ITEMS
 #if UNITY_EDITOR
-        [UnityEditor.MenuItem("Local Saves/Open Folder")]
+        [UnityEditor.MenuItem("Devolvist/Save-Load/Open Local Saves Folder")]
         private static void OpenLocalSavesFolder()
         {
             string savesFolderPath = $"{Application.persistentDataPath}/{LocalSaveLoadConfig.SavableDataFolderName}";
@@ -133,7 +133,7 @@ namespace Devolvist.UnityReusableSolutions.SaveLoad
             Process.Start($"{Application.persistentDataPath}/{LocalSaveLoadConfig.SavableDataFolderName}");
         }
 
-        [MenuItem("Local Saves/Delete")]
+        [MenuItem("Devolvist/Save-Load/Delete Local Saves")]
         public static void DeleteLocalSaves()
         {
             if (LocalSaveLoadConfig.DataReadWriteType == DataReadWriteType.PlayerPrefs)
