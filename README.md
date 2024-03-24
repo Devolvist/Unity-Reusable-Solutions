@@ -282,6 +282,151 @@ public class Example : MonoBehaviour
 </details>
 
 # Save-Load
+Простая система сохранения-загрузки.
+
+> *Имеет зависимость от модуля [Singleton](README.md#singleton)*
+
+<details>
+<summary>Пример использования</summary>
+   
+* Возьмём скрипт псевдо-персонажа, у которого есть поле со значением здоровья, и реализуем интерфейс ISavable:
+
+```csharp
+using UnityEngine;
+using Devolvist.UnityReusableSolutions.SaveLoad;
+
+public class Character : MonoBehaviour, ISavable
+{
+    private int _health;
+
+    public void Load() { }
+
+    public void Save() { }
+
+    public void DeleteSaves() { }
+
+    public void ResetToDefault() { }
+}
+```
+
+* Создадим в сцене GameObject с компонентом SaveLoadService:
+
+![image](https://github.com/Devolvist/Unity-Reusable-Solutions/assets/97983639/745810ec-377f-48e5-80b8-62a5691147b8)
+
+* Добавим реализацию сохранения-загрузки здоровья через взаимодействие с глобальным сервисом:
+
+```csharp
+using UnityEngine;
+using Devolvist.UnityReusableSolutions.SaveLoad;
+
+public class Character : MonoBehaviour, ISavable
+{
+    private const int DEFAULT_HEALTH = 100;
+
+    private int _health = DEFAULT_HEALTH;
+
+    public void Load()
+    {
+        int loadedHealth = SaveLoadService.Instance.LoadData<int>(id: "Health");
+        _health = Mathf.Clamp(loadedHealth, 0, DEFAULT_HEALTH);
+    }
+
+    public void Save()
+    {
+        SaveLoadService.Instance.SaveData(id: "Health", data: _health);
+    }
+
+    public void DeleteSaves()
+    {
+        SaveLoadService.Instance.DeleteSavedData(id: "Health");
+    }
+
+    public void ResetToDefault()
+    {
+        _health = DEFAULT_HEALTH;
+    }
+}
+```
+
+* Добавим реализацию изменения здоровья с последующим сохранением данных:
+
+```csharp
+
+    public void ApplyDamage(int value)
+    {
+        _health = Mathf.Clamp(_health - value, 0, DEFAULT_HEALTH);
+
+        Save();
+    }
+
+```
+
+* Добавим реализацию загрузки данных здоровья при запуске скрипта:
+
+```csharp
+
+    private void Start()
+    {
+        Load();
+    }
+
+```
+
+* Можно передать управление вызовами методов интерфейса ISavable, зарегистрировав персонажа в сервисе сохранения-загрузки:
+
+```csharp
+
+    private void Start()
+{
+    SaveLoadService.Register(this);
+
+    Load();
+}
+
+```
+
+>*Для внешнего Вызова методов ISavable нужно реализовать внешний контроллер, который будет сохранять данные раз в n-времени у всех ISavable-сущностей, или инициировать загрузку, к примеру, при запуске сцены.*
+ ```csharp
+
+ public class Autosave : MonoBehaviour
+ {
+    private int _timeInterval = 10;
+
+    private void Start() => StartCoroutine(PerformSaving());
+
+    private IEnumerator PerformSaving()
+    {
+        while (true)
+        {
+            yield return new WaitForSecondsRealtime(_timeInterval);
+
+            SaveLoadService.SaveRegisteredSavableObjects();
+        }
+    }
+ }
+ ```
+
+> **С более наглядным примером можно ознакомиться в исходном проекте, открыв сцену "SaveLoadExample".**
+
+</details>
+
+<details>
+<summary>Настройка параметров локальных сохранений</summary>
+
+* В папке модуля SaveLoad есть ScriptableObject, в котором можно указать имя папки для сохранений и указать тип обработки данных (BinaryFormatter или PlayerPrefs)
+![image](https://github.com/Devolvist/Unity-Reusable-Solutions/assets/97983639/9152131f-78ad-4ab8-aad2-b8cd26d28bc5)
+
+</details>
+
+<details>  
+<summary>Вызов некоторых функций из главного меню редактора</summary>
+
+* В специальном меню на верхней панели редактора можно открыть папку в проводнике, в которой в настоящий момент находятся сохранённые данные. Или запросить удаление данных из этой папки без взаимодействия с ней.
+![image](https://github.com/Devolvist/Unity-Reusable-Solutions/assets/97983639/80bf1d0f-dbc9-480d-8d42-071953e05db2)
+
+>*Если папки с указанным в конфигурации названием нет на ПК, в консоль будет выведено сообщение о том что локальные сохранения отсутствуют.*
+
+</details>
 
 # Singleton
 
