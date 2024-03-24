@@ -429,6 +429,47 @@ public class Character : MonoBehaviour, ISavable
 </details>
 
 # Singleton
+## Mono Singleton
+Реализация паттерна Singleton, которую можно применить для объектов MonoBehaviour.
+
+<details>
+<summary>Пример использования</summary>
+
+* Создадим свой синглтон, унаследовав его от базового варианта и указав конкретный тип наследника:
+```csharp
+using Devolvist.UnityReusableSolutions.Singleton;
+
+public class SingletonExample : MonoSingleton<SingletonExample>
+{
+    protected override void InitializeOnAwake()
+    {
+        // Initialization implementation...
+    }
+
+    public void DoSomething()
+    {
+        // Behavior...
+    }
+}
+```
+> *Для корректной инициализации всегда выполняйте её логику в переопределённом методе InitializeOnAwake(). Не используйте обычный Awake() в конкретных синглтонах.*
+
+* Для взаимодействия с глобальным экземпляром синглтона, нужно обращаться к его методам через Instance:
+```csharp
+public class Client : MonoBehaviour
+{
+    private void Start()
+    {
+        SingletonExample.Instance.DoSomething();
+    }
+}
+```
+
+> *Созданный синглтон можно опционально сделать объектом, который будет переходить между сценами:*
+> ![image](https://github.com/Devolvist/Unity-Reusable-Solutions/assets/97983639/fa9b3e86-2531-4c41-b8ff-26abba6fc7a6)
+> 
+> *Если убрать галочку, Instance будет существовать только в пределах сцены, в которой он был создан.*
+</details>
 
 # States Management
 
