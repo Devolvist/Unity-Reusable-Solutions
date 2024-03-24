@@ -1,7 +1,7 @@
 # **Unity Reusable Solutions**
 Этот репозиторий предоставляет инструменты и решения, которые можно повторно использовать в проектах на Unity.
 
-# Быстрая установка
+## Быстрая установка
 Скачайте файл [unitypaсkage](Unity_Reusable_Solutions.unitypackage) и импортируйте в корневую папку Assets.
 > *Для избежания ошибок при импорте оставьте все галочки, т.к. внутри пакета есть взаимозависимые модули.*
 
@@ -472,6 +472,130 @@ public class Client : MonoBehaviour
 </details>
 
 # States Management
+Предоставляет простую реализацию паттерна State, позволяющую управлять переходами между конкретными состояниями объекта.
+
+<details>  
+<summary>Пример использования</summary>
+
+* Создадим классы состояний персонажа, реализующие IState:
+  
+```csharp
+public class WalkingState : IState
+{
+    public WalkingState(Animator animator)
+    {
+        _animator = animator;
+    }
+
+    private readonly Animator _animator;
+
+    public void Enter()
+    {
+        _animator.Play("Walking");
+    }
+
+    public void Exit()
+    {
+        _animator.StopPlayback();
+    }
+}
+
+public class RunningState : IState
+{
+    public RunningState(Animator animator)
+    {
+        _animator = animator;
+    }
+
+    private readonly Animator _animator;
+
+    public void Enter()
+    {
+        _animator.Play("Running");
+    }
+
+    public void Exit()
+    {
+        _animator.StopPlayback();
+    }
+}
+
+public class JumpingState : IState
+{
+    public JumpingState(Rigidbody rigidbody, float jumpForce)
+    {
+        _rigidbody = rigidbody;
+        _jumpForce = jumpForce;
+    }
+
+    private readonly Rigidbody _rigidbody;
+    private readonly float _jumpForce;
+
+    public void Enter()
+    {
+        _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+    }
+
+    public void Exit()
+    {
+        _rigidbody.velocity = Vector3.zero;
+    }
+}
+```
+
+* Создадим класс персонажа с полями состояний, машины состояний и параметров в инспекторе:
+
+```csharp
+using Devolvist.UnityReusableSolutions.StatesManagement;
+using UnityEngine;
+
+public class Character : MonoBehaviour
+{
+    [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private float _jumpForce;
+
+    private IState _walkingState;
+    private IState _runningState;
+    private IState _jumpingState;
+    private StateMachine _stateMachine;
+}
+```
+
+* Реализуем инициализацию состояний и переходы между ними в зависимости от ввода:
+
+```csharp
+    private void Awake()
+    {
+        _walkingState = new WalkingState(_animator);
+        _runningState = new RunningState(_animator);
+        _jumpingState = new JumpingState(_rigidbody, _jumpForce);
+
+        _stateMachine = new StateMachine(defaultState: _walkingState);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+            _stateMachine.ChangeState(_walkingState);
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            _stateMachine.ChangeState(_runningState);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            _stateMachine.ChangeState(_jumpingState);
+    }
+```
+
+* Таким образом, мы делегировали конкретное поведение персонажа в зависимости от ввода объектам-состояниям, внутри которых это поведение реализовано.
+Если бы мы реализовывали методы шага, бега и прыжка внутри персонажа, его код в перспективе стал бы слишком запутанным. Особенно, при необходимости расширять существующее поведение и добавляя новое при разных внешних факторах.
+
+> Реализация состояний в данном примере упрощена и описана для понимания их сути.
+Автор даёт себе отчёт в том, что персонажу нужно время для приземления и перехода в состояние бега, чтобы не воспроизводить анимацию бега по воздуху.
+Преимущество состояний как раз в том, чтобы инкапсулировать эту проверку условий и управлять возможностью перехода в другое состояние внутри другого.
+Состояния можно расширить до того, чтобы они могли сами управлять переходами в другие состояния в зависимости от контекста.
+
+</details>
 
 # String Utilities
 
