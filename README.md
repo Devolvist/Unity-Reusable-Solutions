@@ -16,7 +16,7 @@
 <summary>Пример использования</summary>
 
 * Добавьте компонент на камеру в сцене.
-* Назначте событие-триггер для включения и настройте параметры силы и продолжительности эффекта:
+* Назначьте событие-триггер для включения и настройте параметры силы и продолжительности эффекта:
    ![image](https://github.com/Devolvist/Unity-Reusable-Solutions/assets/97983639/fa8fa778-999e-49fe-a160-917babb95c0e)
 
 * Эффект будет воспроизводиться при срабатывании триггера: 
@@ -192,6 +192,94 @@ InternetConnection.Instance.IsAvailable(result => Debug.Log($"Internet connectio
 </details>
 
 # Math
+## Interpolation
+Глобально доступный класс, предоставляющий методы для получения интерполированных значений.
+
+<details>
+<summary>Пример использования GetRange()</summary>
+
+```csharp
+using UnityEngine;
+using Devolvist.UnityReusableSolutions.Math;
+
+public class Example : MonoBehaviour
+{
+    private void Start()
+    {
+        int[] interpolatedRange =
+             Interpolation.GetRange(
+                 minValue: 0,
+                 maxValue: 100,
+                 valuesCount: 10);
+
+        for (int i = 0; i < interpolatedRange.Length; i++)
+            Debug.Log(interpolatedRange[i]);
+    }
+}
+```
+
+* Вывод в консоли:
+  
+![image](https://github.com/Devolvist/Unity-Reusable-Solutions/assets/97983639/e3b82132-56f6-4609-8ec0-719f31e3ec86)
+
+</details>
+
+## Percentage Calculator
+Глобально доступный класс, предоставляющий методы получения процентных значений.
+
+<details>
+<summary>Пример использования GetPercentageValue()</summary>
+
+```csharp
+using UnityEngine;
+using Devolvist.UnityReusableSolutions.Math;
+
+public class Example : MonoBehaviour
+{
+    private void Start()
+    {
+        int percents = PercentageCalculator.GetPercentageValue(
+            currentValue: 110,
+            minValue: 100,
+            maxValue: 1000);
+
+        Debug.Log(string.Concat(percents.ToString() + '%'));
+    }
+}
+```
+
+* Вывод в консоль:
+  
+![image](https://github.com/Devolvist/Unity-Reusable-Solutions/assets/97983639/61c6a016-4097-456b-a065-dfeb8e1da3da)
+
+</details>
+
+<details>
+<summary>Пример использования GetValueFromPercentage()</summary>
+
+```csharp
+using UnityEngine;
+using Devolvist.UnityReusableSolutions.Math;
+
+public class Example : MonoBehaviour
+{
+    private void Start()
+    {
+        int value = PercentageCalculator.GetValueFromPercentage(
+             percentage: 50,
+             minValue: 50,
+             maxValue: 100);
+
+        Debug.Log(value);
+    }
+}
+```
+
+* Вывод в консоль:
+  
+![image](https://github.com/Devolvist/Unity-Reusable-Solutions/assets/97983639/b0464a4f-df40-4c77-af13-cddc3559a521)
+
+</details>
 
 # Save-Load
 
