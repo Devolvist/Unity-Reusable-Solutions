@@ -5,7 +5,7 @@
 Скачайте файл [unitypaсkage](Unity_Reusable_Solutions.unitypackage) и импортируйте в корневую папку Assets.
 > *Для избежания ошибок при импорте оставьте все галочки, т.к. внутри пакета есть взаимозависимые модули.*
 
-![image](https://github.com/Devolvist/Unity-Reusable-Solutions/assets/97983639/52f6d795-3b15-40c6-89a8-ee96806b699e)
+![image](https://github.com/Devolvist/Unity-Reusable-Solutions/assets/97983639/e690c58c-4ee3-4ab1-ac4a-a8cd0e766b1b)
 
 # Effects
 ## Shaking Effect
