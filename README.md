@@ -466,6 +466,7 @@ public class Client : MonoBehaviour
 ```
 
 > *Созданный синглтон можно опционально сделать объектом, который будет переходить между сценами:*
+> 
 > ![image](https://github.com/Devolvist/Unity-Reusable-Solutions/assets/97983639/fa9b3e86-2531-4c41-b8ff-26abba6fc7a6)
 > 
 > *Если убрать галочку, Instance будет существовать только в пределах сцены, в которой он был создан.*
@@ -598,5 +599,41 @@ public class Character : MonoBehaviour
 </details>
 
 # String Utilities
+## Number View Formatter
+Какое число проще прочесть и осмыслить в UI - 10500000 или 10,5М?
+Этот глобально доступный класс предоставляет решение для форматирования чисел от 1000 в удобочитаемый формат.
+Поддерживаются типы int, float, double.
+
+<details>
+<summary>Пример использования</summary>
+
+```csharp
+using UnityEngine;
+using Devolvist.UnityReusableSolutions.Math;
+using Devolvist.UnityReusableSolutions.StringUtilities;
+
+public class Example : MonoBehaviour
+{
+    private void Start()
+    {
+        int min = 500;
+        int max = 2_000_000;
+        int count = 10;
+
+        int[] interpolatedRange = Interpolation.GetRange(min, max, count);
+
+        for (int i = 0; i < interpolatedRange.Length; i++)
+            Debug.Log(NumberViewFormatter.Format(interpolatedRange[i]));
+    }
+}
+```
+
+*Вывод в консоль:*
+
+![image](https://github.com/Devolvist/Unity-Reusable-Solutions/assets/97983639/745c8c9a-c53c-4da6-a53b-61aad1bb8dcc)
+
+</details>
 
 # Time
+## GlobalTimePauseService
+Оболочка для управления временной паузой в одном месте. Избавляет от необходимости каждый раз писать timeScale = 0.0f, timeScale = 1.0f, и искать все скрипты в которых есть обращения к timeScale для паузы.
