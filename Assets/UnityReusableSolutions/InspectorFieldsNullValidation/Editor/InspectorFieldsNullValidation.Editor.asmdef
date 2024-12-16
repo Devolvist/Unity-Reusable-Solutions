@@ -1,0 +1,18 @@
+{
+    "name": "InspectorFieldsNullValidation.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:22afc722a4a8b594a86be19cd9ebf98c"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
